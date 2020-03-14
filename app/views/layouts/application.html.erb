@@ -11,8 +11,8 @@
 
   <body>
 		<header>
-			<nav class="navbar navbar-expand-xl sticky-top navbar-dark bg-dark mt-3 mb-3">
-        <a class="navbar-brand" href="#">PhotoShare</a>
+			<nav class="navbar navbar-expand-xl sticky-top navbar-dark bg-dark pt-3 pb-3">
+        <a class="navbar-brand" href="/">PhotoShare</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav3" aria-controls="navbarNav3" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -25,7 +25,7 @@
                     <a class="nav-link" href="#">ユーザー一覧</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">ログイン</a>
+                    <a class="nav-link" href="/login">ログイン</a>
                 </li>
 								<li class="nav-item">
                     <a class="nav-link" href="#">新規登録</a>
@@ -37,17 +37,20 @@
 
     <%= yield %>
 
-		<footer class="text-muted">
+		<footer class="text-muted mt-3">
 		  <div class="container">
 		    <p class="float-right">
-		      <a href="#">Back to top</a>
+		      <a href="/">Top へ戻る</a>
 		    </p>
-		    <p>
-					New to Bootstrap <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="/docs/4.4/getting-started/introduction/">getting started guide</a>.
+		    <p class="float-left">
+					&copy; kuroda Inc.
 				</p>
 		  </div>
 		</footer>
 
-		</script>
+		<!-- <script>
+			window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="https://getbootstrap.com/docs/4.4/dist/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous">
+		</script> -->
+
   </body>
 </html>
