@@ -1,2 +1,18 @@
-<h1>Users#add</h1>
-<p>Find me in app/views/users/add.html.erb</p>
+<body class="text-center" >
+	<%= form_for(@user, url:{controller: 'users', action: 'add'}, html: {class: "form-signin container"}) do |form| %>
+	  <img class="mb-4" src="" alt="" width="72" height="72">
+		<h1 class="h4 mb-4 font-weight-normal text-muted">登録して写真を投稿しよう</h1>
+		<label for="inputName" class="sr-only">name</label>
+		<%= form.text_field :name, id: "inputName", placeholder: "ユーザーネーム", class: "form-control" %>
+	  <label for="inputEmail" class="sr-only">email</label>
+		<%= form.email_field :email, id: "inputEmail", placeholder: "メールアドレス", class: "form-control" %>
+		<label for="inputPassword" class="sr-only">inputPassword</label>
+		<%= form.password_field :password, id: "inputPassword", placeholder: "パスワード", class: "form-control" %>
+		<label for="confirmPassword" class="sr-only">confirmPassword</label>
+		<%= form.password_field :confirmpassword, id: "confirmPassword", placeholder: "パスワード（確認用）", class: "form-control mb-4" %>
+		<%= form.submit "新規登録", class: "btn btn-lg btn-primary btn-block" %>
+	<% end %>
+	<p class="mb-5">
+		アカウントをお持ちですか？ <a href="/login">ログインする</a>
+	</p>
+</body>
