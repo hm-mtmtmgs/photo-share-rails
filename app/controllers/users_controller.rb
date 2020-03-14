@@ -6,8 +6,13 @@ class UsersController < ApplicationController
   end
 
   def add
+		@user = User.new
   end
 
   def edit
   end
+
+	def login
+		@user = User.new
+	end
 end
