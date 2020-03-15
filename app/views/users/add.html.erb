@@ -1,16 +1,21 @@
 <body class="text-center" >
-	<%= form_for(@user, url:{controller: 'users', action: 'add'}, html: {class: "form-signin container"}) do |form| %>
-	<img class="mb-4" src="/assets/photoshare_logo.gif" alt="" width="292" height="72">
+	<% if @user.errors.any? %>
+		<% @user.errors.full_messages.each do |error| %>
+			<span class="text-danger"><%= error %></span><br>
+		<% end %>
+	<% end %>
+	<%= form_for(@user, url: { controller: 'users', action: 'add' }, html: { class: "form-signin container" }) do |f| %>
+		<img class="mb-4" src="/assets/photoshare_logo.gif" alt="" width="292" height="72">
 		<h1 class="h4 mb-4 font-weight-normal text-muted">登録して写真を投稿しよう</h1>
 		<label for="inputName" class="sr-only">name</label>
-		<%= form.text_field :name, id: "inputName", placeholder: "ユーザーネーム", class: "form-control" %>
+		<%= f.text_field :name, id: "inputName", placeholder: "ユーザーネーム", class: "form-control" %>
 	  <label for="inputEmail" class="sr-only">email</label>
-		<%= form.email_field :email, id: "inputEmail", placeholder: "メールアドレス", class: "form-control" %>
+		<%= f.email_field :email, id: "inputEmail", placeholder: "メールアドレス", class: "form-control" %>
 		<label for="inputPassword" class="sr-only">inputPassword</label>
-		<%= form.password_field :password, id: "inputPassword", placeholder: "パスワード", class: "form-control" %>
+		<%= f.password_field :password, id: "inputPassword", placeholder: "パスワード", class: "form-control" %>
 		<label for="confirmPassword" class="sr-only">confirmPassword</label>
-		<%= form.password_field :confirmpassword, id: "confirmPassword", placeholder: "パスワード（確認用）", class: "form-control mb-4" %>
-		<%= form.submit "新規登録", class: "btn btn-lg btn-primary btn-block" %>
+		<%= f.password_field :confirmpassword, id: "confirmPassword", placeholder: "パスワード（確認用）", class: "form-control mb-4" %>
+		<%= f.submit "新規登録", class: "btn btn-lg btn-primary btn-block" %>
 	<% end %>
 	<p class="mb-5">
 		アカウントをお持ちですか？ <a href="/login">ログインする</a>

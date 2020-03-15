@@ -1,11 +1,19 @@
 <body class="text-center" >
-	<%= form_for(@user, url:{controller: 'users', action: 'login'}, html: {class: "form-signin container"}) do |form| %>
+	<% if flash[:notice] %>
+		<p class="bg-info text-white h5 pt-2 pb-2">
+			<%= flash[:notice] %>
+		</p>
+	<% end %>
+	<% if @error %>
+		<span class="text-danger"><%= @error %></span>
+	<% end %>
+	<%= form_for(@user, url: { controller: 'users', action: 'login' }, html: { class: "form-signin container" }) do |f| %>
 	  <img class="mb-4" src="/assets/photoshare_logo.gif" alt="" width="292" height="72">
 		<label for="inputEmail" class="sr-only">email</label>
-		<%= form.email_field :email, id: "inputEmail", placeholder: "メールアドレス", class: "form-control" %>
+		<%= f.email_field :email, id: "inputEmail", placeholder: "メールアドレス", class: "form-control" %>
 		<label for="inputPassword" class="sr-only">inputPassword</label>
-		<%= form.password_field :password, id: "inputPassword", placeholder: "パスワード", class: "form-control mb-4" %>
-		<%= form.submit "ログイン", class: "btn btn-lg btn-primary btn-block" %>
+		<%= f.password_field :password, id: "inputPassword", placeholder: "パスワード", class: "form-control mb-4" %>
+		<%= f.submit "ログイン", class: "btn btn-lg btn-primary btn-block" %>
 	<% end %>
 	<p class="mb-5">
 		アカウントをお持ちではないですか？ <a href="/signup">登録する</a>
