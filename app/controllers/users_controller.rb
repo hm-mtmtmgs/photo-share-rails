@@ -1,7 +1,4 @@
 class UsersController < ApplicationController
-  def index
-  end
-
   def show
   end
 
@@ -9,10 +6,10 @@ class UsersController < ApplicationController
 		if request.post? then
 			@user = User.new(user_params)
 			if @user.save then
-				flash[:notice] = 'ユーザー登録が完了しました。ログインして写真を投稿しよう'
-				redirect_to '/login'
+				flash[:notice] = "ユーザー登録が完了しました。ログインして写真を投稿しよう"
+				redirect_to("/login")
 			else
-				render 'add'
+				render("add")
 			end
 		else
 			@user = User.new
@@ -26,16 +23,20 @@ class UsersController < ApplicationController
 		if request.post? then
 			@user = User.find_by(email: params[:email], password: params[:password])
 			if @user
-				flash[:notice] = 'ログインしました'
-				redirect_to '/'
+				flash[:notice] = "ログインしました"
+				redirect_to("/")
 			else
 				@user = User.new
-				@error = 'メールアドレスまたはパスワードが間違っています'
-				render 'login'
+				@error = "メールアドレスまたはパスワードが間違っています"
+				render("login")
 			end
 		else
 			@user = User.new
 		end
+	end
+
+	def search
+		@users = User.all
 	end
 
 	private

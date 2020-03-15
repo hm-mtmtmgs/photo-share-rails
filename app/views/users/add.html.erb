@@ -1,21 +1,22 @@
 <body class="text-center" >
 	<% if @user.errors.any? %>
+		<div class="pt-5"></div>
 		<% @user.errors.full_messages.each do |error| %>
-			<span class="text-danger"><%= error %></span><br>
+			<div class="h6 text-danger pb-1"><%= error %></div>
 		<% end %>
 	<% end %>
-	<%= form_for(@user, url: { controller: 'users', action: 'add' }, html: { class: "form-signin container" }) do |f| %>
+	<%= form_for(@user, url: { controller: "users", action: "add" }, html: { class: "form-signin container" }) do |f| %>
 		<img class="mb-4" src="/assets/photoshare_logo.gif" alt="" width="292" height="72">
 		<h1 class="h4 mb-4 font-weight-normal text-muted">登録して写真を投稿しよう</h1>
-		<label for="inputName" class="sr-only">name</label>
-		<%= f.text_field :name, id: "inputName", placeholder: "ユーザーネーム", class: "form-control" %>
-	  <label for="inputEmail" class="sr-only">email</label>
-		<%= f.email_field :email, id: "inputEmail", placeholder: "メールアドレス", class: "form-control" %>
-		<label for="inputPassword" class="sr-only">inputPassword</label>
-		<%= f.password_field :password, id: "inputPassword", placeholder: "パスワード", class: "form-control" %>
-		<label for="confirmPassword" class="sr-only">confirmPassword</label>
-		<%= f.password_field :confirmpassword, id: "confirmPassword", placeholder: "パスワード（確認用）", class: "form-control mb-4" %>
-		<%= f.submit "新規登録", class: "btn btn-lg btn-primary btn-block" %>
+		<label for="InputName" class="sr-only">ユーザーネーム</label>
+		<%= f.text_field :name, { id: "InputName", class: "form-control", placeholder: "ユーザーネーム" } %>
+	  <label for="InputEmail" class="sr-only">メールアドレス</label>
+		<%= f.email_field :email, { id: "InputEmail", class: "form-control", placeholder: "メールアドレス" } %>
+		<label for="InputPassword" class="sr-only">パスワード</label>
+		<%= f.password_field :password, { id: "InputPassword", class: "form-control", placeholder: "パスワード" } %>
+		<label for="ConfirmPassword" class="sr-only">パスワード（確認用）</label>
+		<%= f.password_field :confirmpassword, { id: "ConfirmPassword", class: "form-control mb-4", placeholder: "パスワード（確認用）" } %>
+		<%= f.submit "新規登録", { class: "btn btn-lg btn-primary btn-block" } %>
 	<% end %>
 	<p class="mb-5">
 		アカウントをお持ちですか？ <a href="/login">ログインする</a>

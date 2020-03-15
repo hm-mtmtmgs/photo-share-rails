@@ -10,43 +10,12 @@
   </head>
 
   <body>
-		<header>
-			<nav class="navbar navbar-expand-xl sticky-top navbar-dark bg-dark pt-3 pb-3">
-        <a class="navbar-brand" href="/">PhotoShare</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav3" aria-controls="navbarNav3" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav3">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">投稿一覧</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">ユーザー一覧</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">ログイン</a>
-                </li>
-								<li class="nav-item">
-                    <a class="nav-link" href="/signup">新規登録</a>
-                </li>
-            </ul>
-        </div>
-    	</nav>
-		</header>
+
+		<%= render template: "layouts/header" %>
 
     <%= yield %>
 
-		<footer class="text-muted mt-3">
-		  <div class="container">
-		    <p class="float-right">
-		      <a href="/">Top へ戻る</a>
-		    </p>
-		    <p class="float-left">
-					&copy; kuroda Inc.
-				</p>
-		  </div>
-		</footer>
+		<%= render template: "layouts/footer" %>
 
 		<script>
 			window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="https://getbootstrap.com/docs/4.4/dist/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous">

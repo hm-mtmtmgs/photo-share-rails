@@ -1,0 +1,34 @@
+<div class="container">
+	<%= form_tag(controller: "users", action: "search") do %>
+		<div class="input-group mt-5">
+			<label for="UserSearch" class="sr-only">検索</label>
+			<%= text_field_tag("keyword", "", { id: "UserSearch", class: "form-control", placeholder: "キーワード検索" }) %>
+			<span class="input-group-btn">
+				<%= submit_tag("検索", { class: "btn btn-primary btn-block ml-2" }) %>
+			</span>
+		</div>
+	<% end %>
+
+	<table class="table mt-5">
+		<tr>
+			<th>ID</th>
+			<th>ユーザーネーム</th>
+			<th>email</th>
+			<th>生年月日</th>
+			<th>アイコン</th>
+			<th>パスワード</th>
+		</tr>
+		<% if @users %>
+			<% @users.each do |user| %>
+				<tr>
+					<td><%= user.id %></td>
+					<td><%= user.name %></td>
+					<td><%= user.email %></td>
+					<td><%= user.birthday %></td>
+					<td><%= user.icon %></td>
+					<td><%= user.password %></td>
+				</tr>
+			<% end %>
+		<% end %>
+	</table>
+</div>
