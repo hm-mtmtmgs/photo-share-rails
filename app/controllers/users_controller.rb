@@ -36,7 +36,20 @@ class UsersController < ApplicationController
 	end
 
 	def search
-		@users = User.all
+		if request.post? then
+			if params[:keywords].empty?
+				@users = User.all
+			else
+				split_keywords = params[:keywords].strip.split(/[[:blank:]]+/)
+				@users = []
+				split_keywords.each do |keyword|
+					@users += User.where("name like ? or email like ?", "%#{keyword}%", "%#{keyword}%")
+				end
+				@users.uniq!
+			end
+		else
+			@users = User.all
+		end
 	end
 
 	private

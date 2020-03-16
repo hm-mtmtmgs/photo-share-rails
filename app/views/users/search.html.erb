@@ -2,7 +2,7 @@
 	<%= form_tag(controller: "users", action: "search") do %>
 		<div class="input-group mt-5">
 			<label for="UserSearch" class="sr-only">検索</label>
-			<%= text_field_tag("keyword", "", { id: "UserSearch", class: "form-control", placeholder: "キーワード検索" }) %>
+			<%= text_field_tag("keywords", "", { id: "UserSearch", class: "form-control", placeholder: "キーワード検索" }) %>
 			<span class="input-group-btn">
 				<%= submit_tag("検索", { class: "btn btn-primary btn-block ml-2" }) %>
 			</span>
