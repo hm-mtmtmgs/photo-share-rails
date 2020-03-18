@@ -22,9 +22,8 @@ class UsersController < ApplicationController
 
 	def login
 		if request.post? then
-			@user = User.find_by(email: params[:email], password: params[:password])
-			if @user
-				session[:user_id] = @user.id
+			@user = User.find_by(email: params[:email])
+			if @user && @user.authenticate(params[:password])
 				flash[:notice] = "ログインしました"
 				redirect_to("/mypage")
 			else
