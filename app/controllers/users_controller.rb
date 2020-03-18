@@ -24,8 +24,9 @@ class UsersController < ApplicationController
 		if request.post? then
 			@user = User.find_by(email: params[:email], password: params[:password])
 			if @user
+				session[:user_id] = @user.id
 				flash[:notice] = "ログインしました"
-				redirect_to("/")
+				redirect_to("/mypage")
 			else
 				@user = User.new
 				@error = "メールアドレスまたはパスワードが間違っています"
@@ -51,6 +52,10 @@ class UsersController < ApplicationController
 		else
 			@users = User.all
 		end
+	end
+
+	def mypage
+		@user = User.new
 	end
 
 	private

@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   get "users/edit"
 	get "login", to: "users#login"
 	post "login", to: "users#login"
+	get "mypage", to: "users#mypage"
 end
