@@ -23,7 +23,7 @@
 			<% @users.each do |user| %>
 				<tr>
 					<td><%= user.id %></td>
-					<td><%= user.name %></td>
+					<td><%= link_to(user.name, "/users/#{user.id}") %></td>
 					<td><%= user.username %></td>
 					<td><%= user.email %></td>
 					<td><%= user.birthday %></td>

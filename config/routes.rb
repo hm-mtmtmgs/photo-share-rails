@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   get "users/search", to: "users#search"
 	post "users/search", to: "users#search"
-  get "users/show"
+  get "users/:id", to: "users#show"
   get "signup", to: "users#add"
 	post "signup", to: "users#add"
   get "users/edit"
