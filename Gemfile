@@ -30,6 +30,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'bootstrap', '~> 4.1.3'
 
+gem 'jquery-rails'
+
 gem 'rails-i18n'
 
 group :development, :test do

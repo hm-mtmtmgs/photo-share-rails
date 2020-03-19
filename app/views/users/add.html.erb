@@ -1,4 +1,4 @@
-<body class="text-center" >
+<main class="text-center" >
 	<% if @user.errors.any? %>
 		<div class="pt-5"></div>
 		<% @user.errors.full_messages.each do |error| %>
@@ -21,4 +21,4 @@
 	<p class="mb-5">
 		アカウントをお持ちですか？ <a href="/login">ログインする</a>
 	</p>
-</body>
+</main>
