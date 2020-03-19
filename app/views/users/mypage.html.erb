@@ -1,4 +1,9 @@
 <div class="container">
+	<% if flash[:login] %>
+		<p class="bg-info text-white h5 pt-2 pb-2">
+			<%= flash[:login] %>
+		</p>
+	<% end %>
 	<table class="table mt-5">
 		<tr>
 			<th>ID</th>
@@ -15,7 +20,7 @@
 			<td><%= @user.username %></td>
 			<td><%= @user.email %></td>
 			<td><%= @user.birthday %></td>
-			<td><%= @user.icon %></td>
+			<td><%= image_tag("/images/common/#{@user.icon}", size: "70x70") %></td>
 			<td><%= @user.password %></td>
 		</tr>
 	</table>

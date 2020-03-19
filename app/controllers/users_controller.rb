@@ -4,10 +4,12 @@ class UsersController < ApplicationController
   end
 
   def add
-		if request.post? then
+	if request.post?
 			@user = User.new(user_params)
-			if @user.save then
-				flash[:notice] = "ユーザー登録が完了しました。ログインして写真を投稿しよう"
+			@user.username = "@" + SecureRandom.hex(4)
+			@user.icon = "default.jpg"
+			if @user.save
+				flash[:regist] = "ユーザー登録が完了しました。ログインして写真を投稿しよう"
 				redirect_to("/login")
 			else
 				render("add")
@@ -21,10 +23,10 @@ class UsersController < ApplicationController
   end
 
 	def login
-		if request.post? then
+		if request.post?
 			@user = User.find_by(email: params[:email])
 			if @user && @user.authenticate(params[:password])
-				flash[:notice] = "ログインしました"
+				flash[:login] = "ログインしました"
 				redirect_to("/mypage")
 			else
 				if @user.nil?
@@ -39,7 +41,7 @@ class UsersController < ApplicationController
 	end
 
 	def search
-		if request.post? then
+		if request.post?
 			if params[:keywords].empty?
 				@users = User.all
 			else
