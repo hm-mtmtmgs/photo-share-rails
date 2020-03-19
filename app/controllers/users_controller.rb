@@ -27,7 +27,9 @@ class UsersController < ApplicationController
 				flash[:notice] = "ログインしました"
 				redirect_to("/mypage")
 			else
-				@user = User.new
+				if @user.nil?
+					@user = User.new(email: params[:email])
+				end
 				@error = "メールアドレスまたはパスワードが間違っています"
 				render("login")
 			end
