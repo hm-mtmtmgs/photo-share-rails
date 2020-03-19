@@ -1,12 +1,14 @@
 class UsersController < ApplicationController
+	before_action :login_user?, { only: [:edit, :logout, :mypage] }
+
   def show
-		@user = User.find(params[:id])
+		@user = User.find_by(username: params[:username])
   end
 
   def add
 	if request.post?
 			@user = User.new(user_params)
-			@user.username = "@" + SecureRandom.hex(4)
+			@user.username = SecureRandom.hex(4)
 			@user.icon = "default.jpg"
 			if @user.save
 				flash[:regist] = "ユーザー登録が完了しました。ログインして写真を投稿しよう"
@@ -26,8 +28,9 @@ class UsersController < ApplicationController
 		if request.post?
 			@user = User.find_by(email: params[:email])
 			if @user && @user.authenticate(params[:password])
+				session_login(@user)
 				flash[:login] = "ログインしました"
-				redirect_to("/mypage")
+				redirect_to("/#{@user.username}")
 			else
 				if @user.nil?
 					@user = User.new(email: params[:email])
@@ -40,6 +43,13 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def logout
+		if session_now?
+			session_logout
+			redirect_to("/")
+		end
+	end
+
 	def search
 		if request.post?
 			if params[:keywords].empty?
@@ -48,7 +58,7 @@ class UsersController < ApplicationController
 				split_keywords = params[:keywords].strip.split(/[[:blank:]]+/)
 				@users = []
 				split_keywords.each do |keyword|
-					@users += User.where("name like ? or email like ?", "%#{keyword}%", "%#{keyword}%")
+					@users += User.where("name like ? or username like ?", "%#{keyword}%", "%#{keyword}%")
 				end
 				@users.uniq!
 			end
@@ -57,13 +67,8 @@ class UsersController < ApplicationController
 		end
 	end
 
-	def mypage
-		@user = User.new
-	end
-
 	private
 	def user_params
 		params.require(:user).permit(:name, :email, :password, :password_confirmation)
 	end
-
 end

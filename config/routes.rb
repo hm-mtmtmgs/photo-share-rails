@@ -8,11 +8,11 @@ Rails.application.routes.draw do
 
   get "users/search", to: "users#search"
 	post "users/search", to: "users#search"
-  get "users/:id", to: "users#show"
   get "signup", to: "users#add"
 	post "signup", to: "users#add"
-  get "users/edit"
 	get "login", to: "users#login"
 	post "login", to: "users#login"
-	get "mypage", to: "users#mypage"
+	delete "logout", to: "users#logout"
+	get "users/edit"
+	resources :users, param: :username, path: "/", only: [:show]
 end
