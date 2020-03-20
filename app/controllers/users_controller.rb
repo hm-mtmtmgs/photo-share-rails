@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :login_user?, { only: [:edit, :logout, :mypage] }
+	before_action :login_user?, { only: [:show, :edit, :logout, :search] }
 
   def show
 		@user = User.find_by(username: params[:username])
