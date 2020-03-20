@@ -24,10 +24,10 @@
 				<tr>
 					<td><%= user.id %></td>
 					<td><%= user.name %></td>
-					<td><%= user.username %></td>
+					<td><%= link_to("@" + user.username, "/#{user.username}") %></td>
 					<td><%= user.email %></td>
 					<td><%= user.birthday %></td>
-					<td><%= user.icon %></td>
+					<td><%= image_tag("/images/common/#{user.icon}", size: "70x70", class: "rounded-circle") %></td>
 					<td><%= user.password %></td>
 				</tr>
 			<% end %>
