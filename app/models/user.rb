@@ -1,5 +1,6 @@
 class User < ApplicationRecord
 	has_secure_password(validations: false)
+	mount_uploader(:icon, ImageUploader)
 
 	validates :name, { presence: { message: "を入力してください" },
                      length: { maximum: 20, message: "は20文字以内で入力してください" } }
