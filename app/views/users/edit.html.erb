@@ -22,7 +22,7 @@
 				<div class="form-control">
 					<%= f.file_field :icon, { class: "form-control" } %>
 					<div class="text-center mt-3">
-						<%= image_tag(@user.icon.to_s, size: "170x170", class: "rounded-circle") %>
+						<%= image_tag @user.icon.to_s, size: "170x170", class: "rounded-circle" %>
 					</div>
 				</div>
 			</li>
