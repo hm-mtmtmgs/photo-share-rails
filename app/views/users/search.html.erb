@@ -28,7 +28,7 @@
 					<td><%= link_to("@" + user.username, "/#{user.username}") %></td>
 					<td><%= user.email %></td>
 					<td><%= user.birthday %></td>
-					<td><%= image_tag("/images/common/#{user.icon}", size: "70x70", class: "rounded-circle") %></td>
+					<td><%= image_tag(user.icon.to_s, size: "70x70", class: "rounded-circle") %></td>
 					<td><%= user.password %></td>
 				</tr>
 			<% end %>

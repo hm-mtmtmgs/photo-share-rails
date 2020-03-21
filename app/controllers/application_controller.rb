@@ -4,7 +4,12 @@ class ApplicationController < ActionController::Base
 	private
 	def login_user?
 		unless session_now?
-			redirect_to("/")
+			invalid_operation
 		end
+	end
+
+	def invalid_operation
+		@invalid_message = "不正な操作が行われました"
+		render template: "home/index"
 	end
 end

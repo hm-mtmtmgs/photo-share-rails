@@ -1,9 +1,10 @@
 <% provide(:title, " | #{@user.name}さん (@#{@user.username})") %>
 <main class="text-center" >
 
-	<% if flash[:login] %>
+	<% if flash[:login] || flash[:edit] %>
 		<p class="text-center bg-info text-white h5 pt-2 pb-2">
 			<%= flash[:login] %>
+			<%= flash[:edit] %>
 		</p>
 	<% end %>
 
@@ -11,14 +12,14 @@
 
 		<div class="row border border-bottom-0">
 			<div class="col-xs-12 col-sm-4 pt-3">
-				<%= image_tag("/images/common/#{@user.icon}", size: "170x170", class: "rounded-circle") %>
+				<%= image_tag(@user.icon.to_s, size: "170x170", class: "rounded-circle") %>
 			</div>
 			<div class="col-xs-12 col-sm-4">
 				<ul class="list-unstyled">
 					<li class="display-4 pt-3 pb-1"><%= @user.name %></li>
 					<li class="h5 text-muted"><%= "@" + @user.username %></li>
 					<% if @user.birthday %>
-						<li><i class="fas fa-birthday-cake pr-2"></i><%= @user.birthday %></li>
+						<li><i class="fas fa-birthday-cake pr-2"></i><%= @user.birthday.to_s(:birthday) %></li>
 					<% else %>
 						<li><i class="fas fa-birthday-cake pr-2"></i>未設定</li>
 					<% end %>
@@ -34,7 +35,7 @@
 			</div>
 			<div class="col-xs-12 col-sm-4 py-4">
 				<% if session_user?(@user) %>
-					<%= link_to("プロフィールを編集", "/edit/#{@user.username}", { class: "btn btn-lg btn-outline-primary rounded-pill"}) %><br>
+					<%= link_to("プロフィールを編集", "/#{@user.username}/edit", { class: "btn btn-lg btn-outline-primary rounded-pill"}) %><br>
 					<%= link_to("設定を編集", "#", { class: "btn btn-lg btn-outline-primary rounded-pill mt-3"}) %>
 				<% else %>
 					<%= link_to("フォローする", "#", { class: "btn btn-lg btn-outline-primary rounded-pill"}) %>
@@ -44,7 +45,7 @@
 
 		<div class="row border border-top-0">
 			<div class="col-xs-12 col-sm-12 text-left px-5 py-4">
-				テスト
+				<%= @user.introduction %>
 			</div>
 		</div>
 
