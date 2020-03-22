@@ -1,6 +1,6 @@
 <% provide(:title, " | プロフィールを編集") %>
 <main class="text-center" >
-	<%= form_for(@user, url: { controller: "users", action: "update", id: @user.id }, html: { class: "form-signin container" }) do |f| %>
+	<%= form_for(@user, url: { controller: "users", action: "update" }, html: { class: "form-signin container" }) do |f| %>
 		<h1 class="h2 font-weight-normal text-muted">プロフィールを編集</h1>
 		<ul class="list-unstyled text-left">
 			<li class="pt-3">
