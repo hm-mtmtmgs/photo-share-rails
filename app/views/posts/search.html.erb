@@ -1,0 +1,33 @@
+<% provide(:title, " | 投稿検索") %>
+<div class="container">
+	<%= form_tag(controller: "posts", action: "search") do %>
+		<div class="input-group mt-5">
+			<%= label_tag :keywords, "キーワード検索", { class: "sr-only" } %>
+			<%= text_field_tag("keywords", "", { class: "form-control", placeholder: "キーワード検索" }) %>
+			<span class="input-group-btn">
+				<%= button_tag('<i class="fas fa-search"></i>'.html_safe, { class: "btn btn-primary btn-block ml-2 px-3" }) %>
+			</span>
+		</div>
+	<% end %>
+
+	<table class="table mt-5">
+		<tr>
+			<th>ID</th>
+			<th>ユーザーID</th>
+			<th>写真</th>
+			<th>タイトル</th>
+			<th>メッセージ</th>
+		</tr>
+		<% if @posts %>
+			<% @posts.each do |post| %>
+				<tr>
+					<td><%= post.id %></td>
+					<td><%= post.user.username %></td>
+					<td><%= link_to(image_tag(post.image.to_s, size: "70x70"), "#") %></td>
+					<td><%= post.title %></td>
+					<td><%= post.message %></td>
+				</tr>
+			<% end %>
+		<% end %>
+	</table>
+</div>

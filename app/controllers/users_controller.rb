@@ -28,11 +28,12 @@ class UsersController < ApplicationController
   end
 
 	def update
-		if request.patch?
-			@user = User.find(params[:id])
-			@user.update(user_params)
-			flash[:edit] = "プロフィールを編集しました"
+		@user = User.find(session[:user_id])
+		if @user.update(user_params)
+			flash[:edit] = "プロフィールを更新しました"
 			redirect_to("/#{@user.username}")
+		else
+			render("edit")
 		end
 	end
 
@@ -56,10 +57,8 @@ class UsersController < ApplicationController
 	end
 
 	def logout
-		if session_now?
-			session_logout
-			redirect_to("/")
-		end
+		session_logout
+		redirect_to("/")
 	end
 
 	def search

@@ -9,7 +9,7 @@
 		<div class="h5 text-danger pt-5"><%= @error %></div>
 	<% end %>
 	<%= form_tag("/login", method: :post, class: "form-signin container") do %>
-	  <img class="mb-4" src="/assets/photoshare_logo.gif" alt="" width="292" height="72">
+		<%= image_tag("/images/common/logo_black.png", size: "402x102", class: "img-fluid mb-4 pb-2") %>
 		<%= label_tag :email, "メールアドレス", { class: "sr-only" } %>
 		<%= email_field_tag("email", "#{@user.email}", { class: "form-control", placeholder: "メールアドレス" }) %>
 		<%= label_tag :password, "パスワード", { class: "sr-only" } %>

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   get "/", to: "home#index"
 
-  get "posts/index"
+	get "posts/search", to: "posts#search"
+	post "posts/search", to: "posts#search"
   get "posts/show"
   get "posts/add", to: "posts#add"
 	post "posts/add", to: "posts#add"

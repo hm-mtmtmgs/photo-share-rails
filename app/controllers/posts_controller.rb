@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
-  def index
-  end
+	before_action :login_user?, { only: [:show, :add, :search] }
 
   def show
   end
@@ -22,6 +21,23 @@ class PostsController < ApplicationController
 
   def edit
   end
+
+	def search
+		if request.post?
+			if params[:keywords].empty?
+				@posts = Post.all
+			else
+				split_keywords = params[:keywords].strip.split(/[[:blank:]]+/)
+				@posts = []
+				split_keywords.each do |keyword|
+					@posts += Post.where("title like ? or message like ?", "%#{keyword}%", "%#{keyword}%")
+				end
+				@posts.uniq!
+			end
+		else
+			@posts = Post.all
+		end
+	end
 
 	private
 	def post_params

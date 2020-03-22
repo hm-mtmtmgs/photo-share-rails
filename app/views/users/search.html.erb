@@ -5,7 +5,7 @@
 			<%= label_tag :keywords, "キーワード検索", { class: "sr-only" } %>
 			<%= text_field_tag("keywords", "", { class: "form-control", placeholder: "キーワード検索" }) %>
 			<span class="input-group-btn">
-				<%= submit_tag("検索", { class: "btn btn-primary btn-block ml-2" }) %>
+				<%= button_tag('<i class="fas fa-search"></i>'.html_safe, { class: "btn btn-primary btn-block ml-2 px-3" }) %>
 			</span>
 		</div>
 	<% end %>

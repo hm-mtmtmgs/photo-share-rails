@@ -1,16 +1,22 @@
 <% provide(:title, " | プロフィールを編集") %>
 <main class="text-center" >
-	<%= form_for(@user, url: { controller: "users", action: "update", id: @user.id }, html: { class: "form-signin container" }) do |f| %>
-		<h1 class="h2 font-weight-normal text-muted">プロフィールを編集</h1>
+	<h1 class="h2 font-weight-normal text-muted mt-5">プロフィールを編集</h1>
+
+	<% if @user.errors.any? %>
+		<div class="mt-5"></div>
+		<% @user.errors.full_messages.each do |error| %>
+			<div class="h5 text-danger pb-1"><%= error %></div>
+		<% end %>
+	<% end %>
+
+	<%= form_for(@user, url: { controller: "users", action: "update" }, html: { class: "form-signin container pt-4" }) do |f| %>
 		<ul class="list-unstyled text-left">
 			<li class="pt-3">
-				<%= f.label :name, "名前" %>
-				<span class="text-danger">&nbsp;*</span>
+				<%= f.label :name, '名前 (20文字以内)<span class="text-danger">&nbsp;*</span>'.html_safe %>
 				<%= f.text_field :name, { class: "form-control", placeholder: "名前" } %>
 			</li>
 			<li class="pt-3">
-				<%= f.label :username, "ユーザーネーム" %>
-				<span class="text-danger">&nbsp;*</span>
+				<%= f.label :username, 'ユーザーネーム (半角英数字16文字以内)<span class="text-danger">&nbsp;*</span>'.html_safe %>
 				<%= f.text_field :username, { class: "form-control", placeholder: "ユーザーネーム" } %>
 			</li>
 			<li class="pt-3">
