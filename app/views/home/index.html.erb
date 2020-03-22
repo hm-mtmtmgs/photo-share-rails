@@ -12,7 +12,11 @@
 			<img class="mb-4" src="/assets/photoshare_logo.gif" alt="" width="292" height="72">
       <p class="lead text-muted">あなたの好きな写真をシェアしましょう。</p>
       <p>
-        <a href="/login" class="btn btn-lg btn-primary my-2">写真を投稿する</a>
+				<% if session_now? %>
+        	<a href="/posts/add" class="btn btn-lg btn-primary my-2">写真を投稿する</a>
+				<% else %>
+					<a href="/login" class="btn btn-lg btn-primary my-2">写真を投稿する</a>
+				<% end %>
       </p>
     </div>
   </section>

@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
-  def index
-  end
+	before_action :login_user?, { only: [:show, :add, :search] }
 
   def show
   end
@@ -22,6 +21,10 @@ class PostsController < ApplicationController
 
   def edit
   end
+
+	def search
+		@posts = Post.all
+	end
 
 	private
 	def post_params
