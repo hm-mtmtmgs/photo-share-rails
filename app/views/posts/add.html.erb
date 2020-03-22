@@ -1,2 +1,44 @@
-<h1>Posts#add</h1>
-<p>Find me in app/views/posts/add.html.erb</p>
+<% provide(:title, " | 新規投稿") %>
+<main class="text-center" >
+	<div class="container mt-5">
+		<h1 class="h2 font-weight-normal text-muted">新規投稿</h1>
+		<%= form_for(@post, url: { controller: "posts", action: "add" }) do |f| %>
+			<div class="row">
+
+				<div class="col-sm-12 col-md-6 pt-3">
+					<ul class="list-unstyled text-left">
+						<li class="pt-4">
+							<%= f.label :image, "投稿写真" %>
+							<span class="text-danger">&nbsp;*</span>
+							<div class="border p-3">
+								<%= f.file_field :image, { class: "form-control py-1", accept: "image/*" } %>
+								<div class="text-center my-3">
+									<%= image_tag "", class: "img-fluid img-thumbnail", id: "preview" %>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-s,-12 col-md-6 pt-3">
+					<ul class="list-unstyled text-left">
+						<li class="pt-4">
+							<%= f.label :title, "タイトル (30文字以内)" %>
+							<span class="text-danger">&nbsp;*</span>
+							<%= f.text_field :title, { class: "form-control", placeholder: "タイトル" } %>
+						</li>
+						<li class="pt-4">
+							<%= f.label :message, "メッセージ (200文字以内)" %>
+							<span class="text-danger">&nbsp;*</span>
+							<%= f.text_area :message, { rows: 7, class: "form-control", placeholder: "メッセージ" } %>
+						</li>
+						<li class="pt-4">
+							<%= f.submit "投稿", { class: "btn btn-lg btn-primary btn-block mt-4" } %>
+						</li>
+					</ul>
+				<div>
+
+			</div>
+		<% end %>
+	</div>
+</main>
