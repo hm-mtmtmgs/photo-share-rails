@@ -2,6 +2,14 @@
 <main class="text-center" >
 	<div class="container mt-5">
 		<h1 class="h2 font-weight-normal text-muted">新規投稿</h1>
+
+		<% if @post.errors.any? %>
+			<div class="mt-4"></div>
+			<% @post.errors.full_messages.each do |error| %>
+				<div class="h5 text-danger pb-1"><%= error %></div>
+			<% end %>
+		<% end %>
+
 		<%= form_for(@post, url: { controller: "posts", action: "add" }) do |f| %>
 			<div class="row">
 
