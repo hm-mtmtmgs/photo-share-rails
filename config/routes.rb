@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "posts/index"
   get "posts/show"
   get "posts/add", to: "posts#add"
+	post "posts/add", to: "posts#add"
   get "posts/edit"
 
   get "users/search", to: "users#search"
