@@ -3,6 +3,8 @@ ja:
     attributes:
       user:
         name: 名前
+        username: ユーザーネーム
         email: メールアドレス
         password: パスワード
         password_confirmation: ""
+        introduction: 自己紹介

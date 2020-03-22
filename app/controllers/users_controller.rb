@@ -29,9 +29,12 @@ class UsersController < ApplicationController
 
 	def update
 		@user = User.find(session[:user_id])
-		@user.update(user_params)
-		flash[:edit] = "プロフィールを更新しました"
-		redirect_to("/#{@user.username}")
+		if @user.update(user_params)
+			flash[:edit] = "プロフィールを更新しました"
+			redirect_to("/#{@user.username}")
+		else
+			render("edit")
+		end
 	end
 
 	def login
