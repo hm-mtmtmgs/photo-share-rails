@@ -1,10 +1,11 @@
 <% provide(:title, " | #{@user.name}さん (@#{@user.username})") %>
 <main class="text-center" >
 
-	<% if flash[:login] || flash[:edit] %>
+	<% if flash[:login] || flash[:edit] || flash[:post_complete] %>
 		<p class="text-center bg-info text-white h5 pt-2 pb-2">
 			<%= flash[:login] %>
 			<%= flash[:edit] %>
+			<%= flash[:post_complete] %>
 		</p>
 	<% end %>
 
