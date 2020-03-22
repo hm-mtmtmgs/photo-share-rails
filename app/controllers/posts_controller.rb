@@ -23,7 +23,20 @@ class PostsController < ApplicationController
   end
 
 	def search
-		@posts = Post.all
+		if request.post?
+			if params[:keywords].empty?
+				@posts = Post.all
+			else
+				split_keywords = params[:keywords].strip.split(/[[:blank:]]+/)
+				@posts = []
+				split_keywords.each do |keyword|
+					@posts += Post.where("title like ? or message like ?", "%#{keyword}%", "%#{keyword}%")
+				end
+				@posts.uniq!
+			end
+		else
+			@posts = Post.all
+		end
 	end
 
 	private
