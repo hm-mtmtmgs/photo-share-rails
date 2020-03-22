@@ -13,6 +13,5 @@ Rails.application.routes.draw do
 	get "login", to: "users#login"
 	post "login", to: "users#login"
 	delete "logout", to: "users#logout"
-	get "users/edit"
-	resources :users, param: :username, path: "/", only: [:show]
+	resources :users, param: :username, path: "/", only: [:show, :edit, :update]
 end

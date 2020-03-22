@@ -2,6 +2,13 @@
 
   <section class="jumbotron text-center">
     <div class="container">
+
+			<% if @invalid_message %>
+				<p class="text-center text-danger h4 pb-5">
+					<%= @invalid_message %>
+				</p>
+			<% end %>
+
 			<img class="mb-4" src="/assets/photoshare_logo.gif" alt="" width="292" height="72">
       <p class="lead text-muted">あなたの好きな写真をシェアしましょう。</p>
       <p>

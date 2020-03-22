@@ -1,2 +1,36 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<% provide(:title, " | プロフィールを編集") %>
+<main class="text-center" >
+	<%= form_for(@user, url: { controller: "users", action: "update", id: @user.id }, html: { class: "form-signin container" }) do |f| %>
+		<h1 class="h4 font-weight-normal text-muted">プロフィールを編集</h1>
+		<ul class="list-unstyled text-left">
+			<li class="pt-3">
+				<%= f.label :name, "名前" %>
+				<span class="text-danger">&nbsp;*</span>
+				<%= f.text_field :name, { class: "form-control", placeholder: "名前" } %>
+			</li>
+			<li class="pt-3">
+				<%= f.label :username, "ユーザーネーム" %>
+				<span class="text-danger">&nbsp;*</span>
+				<%= f.text_field :username, { class: "form-control", placeholder: "ユーザーネーム" } %>
+			</li>
+			<li class="pt-3">
+				<%= f.label :birthday, "生年月日" %><br>
+				<%= f.date_select :birthday, { prompt: "--", start_year: 1950, end_year: Time.now.year, class: "form-control" } %>
+			</li>
+			<li class="pt-3">
+				<%= f.label :icon, "アイコン" %>
+				<div class="form-control">
+					<%= f.file_field :icon, { class: "form-control" } %>
+					<div class="text-center mt-3">
+						<%= image_tag @user.icon.to_s, size: "170x170", class: "rounded-circle" %>
+					</div>
+				</div>
+			</li>
+			<li class="pt-3">
+				<%= f.label :introduction, "自己紹介" %>
+				<%= f.text_area :introduction, { class: "form-control", placeholder: "自己紹介" } %>
+			</li>
+		</ul>
+	  <%= f.submit "保存", { class: "btn btn-lg btn-primary btn-block mt-5" } %>
+	<% end %>
+</main>

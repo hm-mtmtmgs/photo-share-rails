@@ -1,15 +1,14 @@
 class UsersController < ApplicationController
-	before_action :login_user?, { only: [:edit, :logout, :mypage] }
+	before_action :login_user?, { only: [:show, :edit, :update, :logout, :search] }
 
   def show
 		@user = User.find_by(username: params[:username])
   end
 
   def add
-	if request.post?
+		if request.post?
 			@user = User.new(user_params)
 			@user.username = SecureRandom.hex(4)
-			@user.icon = "default.jpg"
 			if @user.save
 				flash[:regist] = "ユーザー登録が完了しました。ログインして写真を投稿しよう"
 				redirect_to("/login")
@@ -22,7 +21,20 @@ class UsersController < ApplicationController
   end
 
   def edit
+		@user = User.find_by(username: params[:username])
+		unless session_user?(@user)
+			invalid_operation
+		end
   end
+
+	def update
+		if request.patch?
+			@user = User.find(params[:id])
+			@user.update(user_params)
+			flash[:edit] = "プロフィールを編集しました"
+			redirect_to("/#{@user.username}")
+		end
+	end
 
 	def login
 		if request.post?
@@ -69,6 +81,6 @@ class UsersController < ApplicationController
 
 	private
 	def user_params
-		params.require(:user).permit(:name, :email, :password, :password_confirmation)
+		params.require(:user).permit(:name, :email, :password, :password_confirmation, :icon, :username, :birthday, :introduction)
 	end
 end

@@ -1,3 +1,4 @@
+<% provide(:title, " | 新規登録") %>
 <main class="text-center" >
 	<% if @user.errors.any? %>
 		<div class="pt-5"></div>
@@ -8,14 +9,14 @@
 	<%= form_for(@user, url: { controller: "users", action: "add" }, html: { class: "form-signin container" }) do |f| %>
 		<img class="mb-4" src="/assets/photoshare_logo.gif" alt="" width="292" height="72">
 		<h1 class="h4 mb-4 font-weight-normal text-muted">登録して写真を投稿しよう</h1>
-		<label for="InputName" class="sr-only">名前</label>
-		<%= f.text_field :name, { id: "InputName", class: "form-control", placeholder: "名前" } %>
-	  <label for="InputEmail" class="sr-only">メールアドレス</label>
-		<%= f.email_field :email, { id: "InputEmail", class: "form-control", placeholder: "メールアドレス" } %>
-		<label for="InputPassword" class="sr-only">パスワード</label>
-		<%= f.password_field :password, { id: "InputPassword", class: "form-control", placeholder: "パスワード" } %>
-		<label for="ConfirmPassword" class="sr-only">パスワード（確認用）</label>
-		<%= f.password_field :password_confirmation, { id: "ConfirmPassword", class: "form-control mb-4", placeholder: "パスワード（確認用）" } %>
+		<%= f.label :name, "アイコン", { class: "sr-only" } %>
+		<%= f.text_field :name, { class: "form-control", placeholder: "名前" } %>
+		<%= f.label :email, "メールアドレス", { class: "sr-only" } %>
+		<%= f.email_field :email, { class: "form-control", placeholder: "メールアドレス" } %>
+		<%= f.label :password, "パスワード", { class: "sr-only" } %>
+		<%= f.password_field :password, { class: "form-control", placeholder: "パスワード" } %>
+		<%= f.label :password_confirmation, "パスワード（確認用）", { class: "sr-only" } %>
+		<%= f.password_field :password_confirmation, { class: "form-control mb-4", placeholder: "パスワード（確認用）" } %>
 		<%= f.submit "新規登録", { class: "btn btn-lg btn-primary btn-block" } %>
 	<% end %>
 	<p class="mb-5">
