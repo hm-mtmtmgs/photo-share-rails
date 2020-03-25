@@ -1,7 +1,12 @@
 class User < ApplicationRecord
-	has_many(:post)
+	has_many(:post, dependent: :destroy)
+	has_many(:like, dependent: :destroy)
 	has_secure_password(validations: false)
 	mount_uploader(:icon, IconUploader)
+
+	def already_liked?(post)
+		self.likes.exists?(post_id: post.id)
+	end
 
 	validates :name, { presence: { message: "を入力してください" },
                      length: { maximum: 20, message: "は20文字以内で入力してください", allow_blank: true } }
