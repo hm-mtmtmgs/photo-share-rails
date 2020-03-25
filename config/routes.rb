@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "posts/add", to: "posts#add"
 	post "posts/add", to: "posts#add"
   get "posts/edit"
+	get "posts/delete/:id", to: "posts#destroy"
 
   get "users/search", to: "users#search"
 	post "users/search", to: "users#search"

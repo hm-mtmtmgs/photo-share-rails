@@ -1,11 +1,12 @@
 <% provide(:title, " | #{@user.name}さん (@#{@user.username})") %>
 <main class="text-center" >
 
-	<% if flash[:login] || flash[:edit] || flash[:post_complete] %>
+	<% if flash[:login] || flash[:edit] || flash[:post_complete] || flash[:post_delete] %>
 		<p class="text-center bg-info text-white h5 pt-2 pb-2">
 			<%= flash[:login] %>
 			<%= flash[:edit] %>
 			<%= flash[:post_complete] %>
+			<%= flash[:post_delete] %>
 		</p>
 	<% end %>
 
@@ -13,7 +14,7 @@
 
 		<div class="row border border-bottom-0">
 			<div class="col-xs-12 col-sm-4 pt-3">
-				<%= image_tag(@user.icon.to_s, size: "170x170", class: "rounded-circle") %>
+				<%= image_tag(@user.icon.to_s, size: "200x200", class: "rounded-circle") %>
 			</div>
 			<div class="col-xs-12 col-sm-4">
 				<ul class="list-unstyled">
@@ -45,7 +46,7 @@
 		</div>
 
 		<div class="row border border-top-0">
-			<div class="col-xs-12 col-sm-12 text-left px-5 py-4">
+			<div class="col-xs-12 col-sm-12 text-left px-5 pt-4 pb-5 mt-3">
 				<%= @user.introduction %>
 			</div>
 		</div>
@@ -64,6 +65,7 @@
 							<%= user_post.created_at.to_s(:create_birthday) %><br>
 							<%= user_post.created_at.to_s(:create_time) %>
 						</div>
+				<%= link_to("削除", "/posts/delete/#{user_post.id}", { class: "btn btn-lg btn-outline-primary rounded-pill"}) %>
 					</div>
 					<div class="col-xs-3 col-sm-3">
 						<%= image_tag(user_post.image.to_s, class: "img-fluid img-thumbnail") %>
