@@ -1,2 +1,27 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<% provide(:title, " | ") %>
+<main class="text-center" >
+	<div class="container mt-5">
+		<table class="table mt-5">
+			<tr>
+				<th>ID</th>
+				<th>ユーザーID</th>
+				<th>写真</th>
+				<th>タイトル</th>
+				<th>メッセージ</th>
+				<th>いいね</th>
+			</tr>
+			<tr>
+				<td><%= @post.id %></td>
+				<td><%= @post.user.username %></td>
+				<td><%= image_tag(@post.image.to_s, size: "70x70") %></td>
+				<td><%= @post.title %></td>
+				<td><%= @post.message %></td>
+				<td>
+					<div id="like<%= @post.id %>">
+             <%= render partial: 'likes/like', locals: { post: @post } %>
+          </div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</main>

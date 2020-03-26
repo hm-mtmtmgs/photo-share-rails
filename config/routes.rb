@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  get "/", to: "home#index"
+  root "home#index"
 
 	get "posts/search", to: "posts#search"
 	post "posts/search", to: "posts#search"
-  get "posts/show"
+  get "posts/show/:id", to: "posts#show"
   get "posts/add", to: "posts#add"
 	post "posts/add", to: "posts#add"
   get "posts/edit"
@@ -17,4 +17,7 @@ Rails.application.routes.draw do
 	post "login", to: "users#login"
 	delete "logout", to: "users#logout"
 	resources :users, param: :username, path: "/", only: [:show, :edit, :update]
+
+	post "/likes/:post_id/create", to: "likes#create"
+	delete "/likes/:post_id/delete", to: "likes#destroy"
 end

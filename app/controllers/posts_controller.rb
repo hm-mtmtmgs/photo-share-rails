@@ -2,6 +2,7 @@ class PostsController < ApplicationController
 	before_action :login_user?, { only: [:show, :add, :search, :destroy] }
 
   def show
+		@post = Post.find(params[:id])
   end
 
   def add
