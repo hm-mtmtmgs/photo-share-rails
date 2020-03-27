@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
-	before_action :login_user?, { only: [:show, :add, :search] }
+	before_action :login_user?, { only: [:show, :add, :search, :destroy] }
 
   def show
+		@post = Post.find(params[:id])
   end
 
   def add
@@ -37,6 +38,12 @@ class PostsController < ApplicationController
 		else
 			@posts = Post.all
 		end
+	end
+
+	def destroy
+		Post.find(params[:id]).destroy
+		flash[:post_delete] = "投稿を削除しました"
+		redirect_to("/#{session_user.username}")
 	end
 
 	private

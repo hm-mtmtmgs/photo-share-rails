@@ -17,13 +17,14 @@
 			<th>写真</th>
 			<th>タイトル</th>
 			<th>メッセージ</th>
+			<th>いいね</th>
 		</tr>
 		<% if @posts %>
 			<% @posts.each do |post| %>
 				<tr>
 					<td><%= post.id %></td>
 					<td><%= post.user.username %></td>
-					<td><%= link_to(image_tag(post.image.to_s, size: "70x70"), "#") %></td>
+					<td><%= link_to(image_tag(post.image.to_s, size: "70x70"), "/posts/show/#{post.id}") %></td>
 					<td><%= post.title %></td>
 					<td><%= post.message %></td>
 				</tr>
