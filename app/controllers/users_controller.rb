@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def show
 		@user = User.find_by(username: params[:username])
+		@post = Post.all
   end
 
   def add
@@ -22,16 +23,13 @@ class UsersController < ApplicationController
 
   def edit
 		@user = User.find_by(username: params[:username])
-		unless session_user?(@user)
-			invalid_operation
-		end
+		login_user_invalid_operation_inspection(@user)
   end
 
 	def update
-		@user = User.find(session[:user_id])
-		if @user.update(user_params)
+		if session_user.update(user_params)
 			flash[:edit] = "プロフィールを更新しました"
-			redirect_to("/#{@user.username}")
+			redirect_to("/#{session_user.username}")
 		else
 			render("edit")
 		end

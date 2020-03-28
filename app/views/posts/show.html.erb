@@ -17,7 +17,7 @@
 				<td><%= @post.title %></td>
 				<td><%= @post.message %></td>
 				<td>
-					<div id="like<%= @post.id %>">
+					<div id="like_<%= @post.id %>">
              <%= render partial: 'likes/like', locals: { post: @post } %>
           </div>
 				</td>

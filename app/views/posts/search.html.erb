@@ -27,6 +27,11 @@
 					<td><%= link_to(image_tag(post.image.to_s, size: "70x70"), "/posts/show/#{post.id}") %></td>
 					<td><%= post.title %></td>
 					<td><%= post.message %></td>
+					<td>
+						<div id="like_<%= post.id %>">
+	             <%= render partial: 'likes/like', locals: { post: post } %>
+	          </div>
+					</td>
 				</tr>
 			<% end %>
 		<% end %>

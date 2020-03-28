@@ -1,10 +1,10 @@
-<% if Like.find_by(user_id: session_user.id, post_id: @post.id) %>
-	<%= link_to("/likes/#{@post.id}/delete", {method: "delete", remote: true}) do %>
+<% if Like.find_by(user_id: session_user.id, post_id: post.id) %>
+	<%= link_to("/likes/#{post.id}/delete", {method: "delete", remote: true}) do %>
 		<span class="fas fa-heart like-btn text-danger"></span>
 	<% end %>
 <% else %>
-	<%= link_to("/likes/#{@post.id}/create", {method: "post", remote: true}) do %>
+	<%= link_to("/likes/#{post.id}/create", {method: "post", remote: true}) do %>
 		<span class="far fa-heart like-btn text-danger"></span>
 	<% end %>
 <% end %>
-<%= @post.likes.length %>
+<%= post.likes.length %>
