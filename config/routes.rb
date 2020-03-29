@@ -17,6 +17,11 @@ Rails.application.routes.draw do
 	post "login", to: "users#login"
 	delete "logout", to: "users#logout"
 	resources :users, param: :username, path: "/", only: [:show, :edit, :update]
+	resources :users, param: :username do
+		member do
+			get :following, :follower
+		end
+	end
 
 	post "/likes/:post_id/create", to: "likes#create"
 	delete "/likes/:post_id/delete", to: "likes#destroy"
