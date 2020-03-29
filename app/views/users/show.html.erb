@@ -18,7 +18,7 @@
 			</div>
 			<div class="col-xs-12 col-sm-4">
 				<ul class="list-unstyled">
-					<li class="display-4 pt-3 pb-1"><%= @user.name %></li>
+					<li class="h1 pt-5 pb-1"><%= @user.name %></li>
 					<li class="h5 text-muted"><%= "@" + @user.username %></li>
 					<% if @user.birthday %>
 						<li><i class="fas fa-birthday-cake pr-2"></i><%= @user.birthday.to_s(:birthday) %></li>
@@ -27,11 +27,10 @@
 					<% end %>
 				</ul>
 				<div class="row">
-					<div class="col-xs-12 col-sm-6">
-						フォロー
-					</div>
-					<div class="col-xs-12 col-sm-6">
-						フォロワー
+					<div class="col-xs-12 col-sm-12">
+						<div id="follow_<%= @user.id %>_count">
+							<%= render partial: "relationships/count", locals: { user: @user } %>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -40,7 +39,9 @@
 					<%= link_to("プロフィールを編集", "/#{@user.username}/edit", { class: "btn btn-lg btn-outline-primary rounded-pill"}) %><br>
 					<%= link_to("設定を編集", "#", { class: "btn btn-lg btn-outline-primary rounded-pill mt-3"}) %>
 				<% else %>
-					<%= link_to("フォローする", "#", { class: "btn btn-lg btn-outline-primary rounded-pill"}) %>
+					<div id="follow_<%= @user.id %>">
+						<%= render partial: "relationships/relationship", locals: { user: @user }  %>
+					</div>
 				<% end %>
 			</div>
 		</div>
@@ -74,7 +75,7 @@
 								<%= user_post.created_at.to_s(:create_birthday) %><br>
 								<%= user_post.created_at.to_s(:create_time) %>
 							</div>
-							<div id="like_<%= user_post.id %>" class="">
+							<div id="like_<%= user_post.id %>" class="h4">
 		             <%= render partial: 'likes/like', locals: { post: user_post } %>
 		          </div>
 							<%= link_to("削除", "/posts/delete/#{user_post.id}", { class: "btn btn-lg btn-outline-primary rounded-pill"}) %>
@@ -106,7 +107,13 @@
 		</div>
 
 		<div class="d-none" id="area_1">
-			コメント
+			<div class="row border">
+				<div class="col-xs-12 col-sm-12">
+					<div class="h6 my-5">
+						コメントがありません
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<div class="d-none" id="area_2">

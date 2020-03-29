@@ -5,7 +5,7 @@ module ApplicationHelper
 
 	def session_user
 		if session[:user_id]
-			@user = User.find_by(id: session[:user_id])
+			@current_user = User.find_by(id: session[:user_id])
 		end
 	end
 
@@ -19,7 +19,7 @@ module ApplicationHelper
 
 	def session_logout
 		session.delete(:user_id)
-		@user = nil
+		@current_user = nil
 	end
 
 	def login_user_invalid_operation_inspection(user)

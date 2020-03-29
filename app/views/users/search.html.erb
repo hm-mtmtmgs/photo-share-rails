@@ -23,18 +23,26 @@
 					<div class="col-xs-12 col-sm-4 py-3">
 						<%= link_to(image_tag(user.icon.to_s, size: "180x180", class: "img-fluid rounded-circle"), "/#{user.username}") %>
 						<div class="pt-3">
-							フォロー　　フォロワー
+							<div id="follow_<%= user.id %>_count">
+								<%= render partial: "relationships/count", locals: { user: user } %>
+							</div>
 						</div>
 					</div>
 					<div class="col-xs-12 col-sm-5">
 						<ul class="list-unstyled pt-4">
-							<li class="h2"><%= user.name %></li>
-							<li class="text-muted"><%= link_to("@" + user.username, "/#{user.username}") %></li>
-							<li class="pt-4 text-left"><%= user.introduction.truncate(75) %></li>
+							<li class="h1"><%= user.name %></li>
+							<li class="h6"><%= link_to("@" + user.username, "/#{user.username}") %></li>
+							<% unless user.introduction.nil? %>
+								<li class="pt-4 text-left"><%= user.introduction.truncate(75) %></li>
+							<% end %>
 						</ul>
 					</div>
 					<div class="col-xs-12 col-sm-3 pt-4">
-						<%= link_to("フォローする", "#", { class: "btn btn-lg btn-outline-primary rounded-pill"}) %>
+						<% unless session_user?(user) %>
+							<div id="follow_<%= user.id %>">
+								<%= render partial: "relationships/relationship", locals: { user: user }  %>
+							</div>
+						<% end %>
 					</div>
 				</div>
 			<% end %>
