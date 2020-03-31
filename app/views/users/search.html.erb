@@ -1,37 +1,63 @@
 <% provide(:title, " | ユーザー検索") %>
-<div class="container">
-	<%= form_tag(controller: "users", action: "search") do %>
-		<div class="input-group mt-5">
-			<%= label_tag :keywords, "キーワード検索", { class: "sr-only" } %>
-			<%= text_field_tag("keywords", "", { class: "form-control", placeholder: "キーワード検索" }) %>
-			<span class="input-group-btn">
-				<%= button_tag('<i class="fas fa-search"></i>'.html_safe, { class: "btn btn-primary btn-block ml-2 px-3" }) %>
-			</span>
-		</div>
-	<% end %>
+<main class="text-center" >
 
-	<table class="table mt-5">
-		<tr>
-			<th>ID</th>
-			<th>名前</th>
-			<th>ユーザーネーム</th>
-			<th>email</th>
-			<th>生年月日</th>
-			<th>アイコン</th>
-			<th>パスワード</th>
-		</tr>
-		<% if @users %>
+	<div class="container mt-5">
+
+		<h1 class="h3 font-weight-normal text-muted mb-4">キーワードで<br class="d-sm-none">ユーザーを検索</h1>
+
+		<div class="row mx-3 mb-5">
+			<div class="col-xs-12 col-sm-12">
+				<%= form_tag(controller: "users", action: "search") do %>
+					<div class="input-group">
+						<%= label_tag :keywords, "キーワード検索", { class: "sr-only" } %>
+						<%= text_field_tag("keywords", "", { class: "form-control", placeholder: "キーワード検索" }) %>
+						<span class="input-group-btn">
+							<%= button_tag('<i class="fas fa-search"></i>'.html_safe, { class: "btn btn-primary btn-block ml-2 px-3" }) %>
+						</span>
+					</div>
+				<% end %>
+			</div>
+		</div>
+
+		<% unless @users.empty? %>
 			<% @users.each do |user| %>
-				<tr>
-					<td><%= user.id %></td>
-					<td><%= user.name %></td>
-					<td><%= link_to("@" + user.username, "/#{user.username}") %></td>
-					<td><%= user.email %></td>
-					<td><%= user.birthday %></td>
-					<td><%= image_tag(user.icon.to_s, size: "70x70", class: "rounded-circle") %></td>
-					<td><%= user.password %></td>
-				</tr>
+				<div class="row border mx-2 py-3">
+					<div class="col-xs-12 col-sm-4 py-3">
+						<%= link_to(image_tag(user.icon.to_s, size: "180x180", class: "img-fluid rounded-circle border"), "/#{user.username}") %>
+						<div class="pt-3">
+							<div id="follow_<%= user.id %>_count">
+								<%= render partial: "relationships/count", locals: { user: user } %>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-5">
+						<ul class="list-unstyled pt-4">
+							<li class="h1"><%= user.name %></li>
+							<li class="h6"><%= link_to("@" + user.username, "/#{user.username}") %></li>
+							<% unless user.introduction.nil? %>
+								<li class="pt-4 text-left"><%= user.introduction.truncate(75) %></li>
+							<% end %>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-3 pt-4">
+						<% unless session_user?(user) %>
+							<div id="follow_<%= user.id %>">
+								<%= render partial: "relationships/relationship", locals: { user: user }  %>
+							</div>
+						<% end %>
+					</div>
+				</div>
 			<% end %>
+		<% else %>
+			<div class="row border mx-2">
+				<div class="col-xs-12 col-sm-12">
+					<div class="h6 my-5">
+						該当のユーザーがいません
+					</div>
+				</div>
+			</div>
 		<% end %>
-	</table>
-</div>
+
+	</div>
+
+</main>

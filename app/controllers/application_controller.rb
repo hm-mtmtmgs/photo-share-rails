@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
 	include(ApplicationHelper)
+	include(HomeHelper)
 
 	private
 	def login_user?
@@ -10,6 +11,7 @@ class ApplicationController < ActionController::Base
 
 	def invalid_operation
 		@invalid_message = "不正な操作が行われました"
+		home_new_arrival_post
 		render template: "home/index"
 	end
 end

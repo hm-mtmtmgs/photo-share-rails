@@ -1,0 +1,5 @@
+$("#follow_<%= user.id %>").html("<%= j(render partial: 'relationships/relationship', locals: { user: user }) %>");
+$("#follow_<%= user.id %>_count").html("<%= j(render partial: 'relationships/count', locals: { user: user }) %>");
+if("<%= user %> === <%= session_user %>"){
+	$("#follow_<%= session_user.id %>_count").html("<%= j(render partial: 'relationships/count', locals: { user: session_user }) %>");
+}

@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
-	before_action :login_user?, { only: [:show, :edit, :update, :logout, :search] }
+	before_action :login_user?, { only: [:show, :edit, :update, :logout, :search, :following, :follower] }
 
   def show
-		@user = User.find_by(username: params[:username])
+		user_get_from_username
+		@post = Post.all
   end
 
   def add
@@ -21,17 +22,14 @@ class UsersController < ApplicationController
   end
 
   def edit
-		@user = User.find_by(username: params[:username])
-		unless session_user?(@user)
-			invalid_operation
-		end
+		user_get_from_username
+		login_user_invalid_operation_inspection(@user)
   end
 
 	def update
-		@user = User.find(session[:user_id])
-		if @user.update(user_params)
+		if session_user.update(user_params)
 			flash[:edit] = "プロフィールを更新しました"
-			redirect_to("/#{@user.username}")
+			redirect_to("/#{session_user.username}")
 		else
 			render("edit")
 		end
@@ -78,8 +76,20 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def following
+		user_get_from_username
+	end
+
+	def follower
+		user_get_from_username
+	end
+
 	private
 	def user_params
 		params.require(:user).permit(:name, :email, :password, :password_confirmation, :icon, :username, :birthday, :introduction)
+	end
+
+	def user_get_from_username
+		@user = User.find_by(username: params[:username])
 	end
 end

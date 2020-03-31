@@ -1,15 +1,27 @@
 class User < ApplicationRecord
 	has_many(:post, dependent: :destroy)
 	has_many(:like, dependent: :destroy)
+	has_many(:relationships, foreign_key: "user_id")
+  has_many(:reverse_of_relationships, class_name: "Relationship", foreign_key: "follow_id")
+	has_many(:followings, through: :relationships, source: :follow)
+  has_many(:followers, through: :reverse_of_relationships, source: :user)
 	has_secure_password(validations: false)
 	mount_uploader(:icon, IconUploader)
 
-	def already_liked?(post)
-		self.likes.exists?(post_id: post.id)
-	end
+	def follow(other_user)
+		self.followings.push(other_user)
+  end
+
+  def unfollow(other_user)
+		self.relationships.find_by(follow_id: other_user.id).destroy
+  end
+
+  def following?(other_user)
+    self.followings.include?(other_user)
+  end
 
 	validates :name, { presence: { message: "を入力してください" },
-                     length: { maximum: 20, message: "は20文字以内で入力してください", allow_blank: true } }
+                     length: { maximum: 12, message: "は12文字以内で入力してください", allow_blank: true } }
 
 	validates :username, { presence: { message: "を入力してください" },
 												 uniqueness: { message: "は既に使用されています", allow_blank: true },

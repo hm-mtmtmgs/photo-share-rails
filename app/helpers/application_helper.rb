@@ -21,4 +21,10 @@ module ApplicationHelper
 		session.delete(:user_id)
 		@current_user = nil
 	end
+
+	def login_user_invalid_operation_inspection(user)
+		unless session_user?(user)
+			invalid_operation
+		end
+	end
 end
