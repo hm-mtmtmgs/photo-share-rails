@@ -20,9 +20,6 @@ class PostsController < ApplicationController
 		end
   end
 
-  def edit
-  end
-
 	def search
 		if request.post?
 			if params[:keywords].empty?

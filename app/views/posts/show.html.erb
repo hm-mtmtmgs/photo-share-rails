@@ -1,27 +1,75 @@
-<% provide(:title, " | ") %>
+<% provide(:title, " | #{@post.title}") %>
 <main class="text-center" >
+
 	<div class="container mt-5">
-		<table class="table mt-5">
-			<tr>
-				<th>ID</th>
-				<th>ユーザーID</th>
-				<th>写真</th>
-				<th>タイトル</th>
-				<th>メッセージ</th>
-				<th>いいね</th>
-			</tr>
-			<tr>
-				<td><%= @post.id %></td>
-				<td><%= @post.user.username %></td>
-				<td><%= image_tag(@post.image.to_s, size: "70x70") %></td>
-				<td><%= @post.title %></td>
-				<td><%= @post.message %></td>
-				<td>
-					<div id="like_<%= @post.id %>">
-             <%= render partial: 'likes/like', locals: { post: @post } %>
-          </div>
-				</td>
-			</tr>
-		</table>
+
+		<div class="row">
+
+			<div class="col-xs-12 col-sm-8">
+				<div class="mx-4">
+					<div class="border">
+						<div class="text-left my-4 ml-3">
+							<%= link_to("/#{@post.user.username}") do %>
+								<%= image_tag(@post.user.icon.to_s, size: "45x45", class: "img-fluid rounded-pill border") %>
+								<span class="text-muted pl-2">
+									<%= link_to("#{@post.user.name} (#{'@' + @post.user.username})", "/#{@post.user.username}") %>
+								</span>
+							<% end %>
+							<span class="text-muted pl-3">
+								<%= @post.created_at.to_s(:create_birthday) %>
+							</span>
+							<span id="like_<%= @post.id %>" class="h4 pl-4">
+								 <%= render partial: 'likes/like', locals: { post: @post } %>
+							</span>
+							<div class="h4 text-left mt-4 ml-2">
+								<%= @post.title %>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="border p-5">
+							<%= image_tag(@post.image.to_s, class: "img-fluid img-thumbnail") %>
+						</div>
+					</div>
+					<div class="border">
+						<div class="text-left m-4">
+							<%= @post.message %>
+						</div>
+					</div>
+					<div class="text-left mt-5 mx-3">
+						<div class="h6 border-bottom">
+							件のコメント
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="d-none d-sm-block col-sm-4">
+				<div class="h5 text-left border m-0 p-3">
+					<%= link_to(@post.user.name, "/#{@post.user.username}") %>さんのその他の投稿
+				</div>
+				<div class="px-3 pt-2 border">
+					<% unless @post.user.post.present? %>
+						<% user_new_arrival_post.each do |user_post| %>
+							<div class="px-2 py-3">
+								<%= link_to("/posts/show/#{user_post.id}") do %>
+									<%= image_tag(user_post.image.to_s, class: "img-fluid img-thumbnail border") %>
+									<div class="text-left mt-2 ml-2">
+										<%= user_post.title %>
+									</div>
+								<% end %>
+							</div>
+						<% end %>
+					<% else %>
+						<div class="h6 py-4">
+							その他の投稿はありません
+						</div>
+					<% end %>
+				</div>
+			</div>
+
+		</div>
+
 	</div>
+
 </main>

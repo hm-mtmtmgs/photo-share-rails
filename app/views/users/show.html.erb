@@ -81,7 +81,7 @@
 							<%= link_to("削除", "/posts/delete/#{user_post.id}", { class: "btn btn-lg btn-outline-primary rounded-pill"}) %>
 						</div>
 						<div class="col-xs-3 col-sm-3">
-							<%= image_tag(user_post.image.to_s, class: "img-fluid img-thumbnail") %>
+							<%= link_to(image_tag(user_post.image.to_s, class: "img-fluid img-thumbnail"), "/posts/show/#{user_post.id}") %>
 						</div>
 						<div class="col-xs-7 col-sm-7">
 							<div class="text-left border mt-3">
