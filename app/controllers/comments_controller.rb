@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
 	def destroy
 		@comment = Comment.find(params[:comment][:id])
 		@comment.destroy
+		flash[:comment_delete] = "コメントを削除しました"
 		redirect_to("/#{session_user.username}")
 	end
 
