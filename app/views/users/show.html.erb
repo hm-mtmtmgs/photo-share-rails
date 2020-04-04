@@ -47,8 +47,10 @@
 		</div>
 
 		<div class="row border border-top-0">
-			<div class="col-xs-12 col-sm-12 text-left px-5 pt-4 pb-5 mt-3">
-				<%= @user.introduction %>
+			<div class="col-xs-12 col-sm-12">
+				<div class="text-left pt-4 px-5 pb-5">
+					<%= @user.introduction %>
+				</div>
 			</div>
 		</div>
 
@@ -72,25 +74,29 @@
 					<div class="row border p-3 pb-4">
 						<div class="col-xs-2 col-sm-2">
 							<div class="p-3 mt-3">
-								<%= user_post.created_at.to_s(:create_birthday) %><br>
+								<%= user_post.created_at.to_s(:create_date) %><br>
 								<%= user_post.created_at.to_s(:create_time) %>
 							</div>
 							<div id="like_<%= user_post.id %>" class="h4">
 		             <%= render partial: 'likes/like', locals: { post: user_post } %>
 		          </div>
-							<%= link_to("削除", "/posts/delete/#{user_post.id}", { class: "btn btn-lg btn-outline-primary rounded-pill"}) %>
+							<% if session_user?(@user) %>
+								<%= link_to("削除", "/posts/delete/#{user_post.id}", { class: "btn btn-lg btn-outline-primary rounded-pill"}) %>
+							<% end %>
 						</div>
 						<div class="col-xs-3 col-sm-3">
-							<%= link_to(image_tag(user_post.image.to_s, class: "img-fluid img-thumbnail"), "/posts/show/#{user_post.id}") %>
+							<%= link_to("/posts/show/#{user_post.id}") do %>
+								<%= image_tag(user_post.image.to_s, class: "img-fluid img-thumbnail") %>
+							<% end %>
 						</div>
 						<div class="col-xs-7 col-sm-7">
-							<div class="text-left border mt-3">
-								<div class="p-2">
+							<div class="text-left border mt-1 h-100">
+								<div class="border-bottom border-dark p-3">
 									タイトル&nbsp;：&nbsp;<%= user_post.title %>
 								</div>
-							</div>
-							<div class="text-left border input-lg p-3 h-75">
-								<%= user_post.message %>
+								<div class="p-4">
+									<%= user_post.message %>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -107,13 +113,47 @@
 		</div>
 
 		<div class="d-none" id="area_1">
-			<div class="row border">
-				<div class="col-xs-12 col-sm-12">
-					<div class="h6 my-5">
-						コメントがありません
+			<% unless @user.comments.empty? %>
+				<% @user.comments.reverse_each do |user_comment| %>
+					<div class="row border p-3 pb-4">
+						<div class="col-xs-2 col-sm-2">
+							<div class="p-3 mt-3">
+								<%= user_comment.post.created_at.to_s(:create_date) %><br>
+								<%= user_comment.post.created_at.to_s(:create_time) %>
+								<% if session_user?(@user) %>
+									<%= form_for(user_comment, html: { method: :delete }) do |f| %>
+										<%= f.hidden_field :id, value: user_comment.id %>
+										<%= f.submit "削除", { class: "btn btn-lg btn-outline-primary rounded-pill" } %>
+									<% end %>
+								<% end %>
+							</div>
+						</div>
+						<div class="col-xs-3 col-sm-3">
+							<%= link_to("/posts/show/#{user_comment.post.id}") do %>
+								<%= image_tag(user_comment.post.image.to_s, class: "img-fluid img-thumbnail") %>
+							<% end %>
+						</div>
+						<div class="col-xs-7 col-sm-7">
+							<div class="text-left border mt-1 h-100">
+								<div class="border-bottom border-dark p-3">
+									コメント
+								</div>
+								<div class="p-4">
+									<%= user_comment.comment %>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% end %>
+			<% else %>
+				<div class="row border">
+					<div class="col-xs-12 col-sm-12">
+						<div class="h6 my-5">
+							コメントがありません
+						</div>
 					</div>
 				</div>
-			</div>
+			<% end %>
 		</div>
 
 		<div class="d-none" id="area_2">
@@ -122,21 +162,23 @@
 					<div class="row border p-3 pb-4">
 						<div class="col-xs-2 col-sm-2">
 							<div class="p-3 mt-3">
-								<%= user_liked_post(user_like.post_id).created_at.to_s(:create_birthday) %><br>
-								<%= user_liked_post(user_like.post_id).created_at.to_s(:create_time) %>
+								<%= user_like.post.created_at.to_s(:create_date) %><br>
+								<%= user_like.post.created_at.to_s(:create_time) %>
 							</div>
 						</div>
 						<div class="col-xs-3 col-sm-3">
-							<%= image_tag(user_liked_post(user_like.post_id).image.to_s, class: "img-fluid img-thumbnail") %>
+							<%= link_to("/posts/show/#{user_like.post.id}") do %>
+								<%= image_tag(user_like.post.image.to_s, class: "img-fluid img-thumbnail") %>
+							<% end %>
 						</div>
 						<div class="col-xs-7 col-sm-7">
-							<div class="text-left border mt-3">
-								<div class="p-2">
-									タイトル&nbsp;：&nbsp;<%= user_liked_post(user_like.post_id).title %>
+							<div class="text-left border mt-1 h-100">
+								<div class="border-bottom border-dark p-3">
+									タイトル&nbsp;：&nbsp;<%= user_like.post.title %>
 								</div>
-							</div>
-							<div class="text-left border input-lg p-3 h-75">
-								<%= user_liked_post(user_like.post_id).message %>
+								<div class="p-4">
+									<%= user_like.post.message %>
+								</div>
 							</div>
 						</div>
 					</div>

@@ -27,4 +27,6 @@ Rails.application.routes.draw do
 	delete "/likes/:post_id/delete", to: "likes#destroy"
 
 	resources :relationships, only:[:create, :destroy]
+
+	resources :comments, only:[:create, :destroy]
 end

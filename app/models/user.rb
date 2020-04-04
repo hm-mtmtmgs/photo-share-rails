@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 	has_many(:post, dependent: :destroy)
 	has_many(:like, dependent: :destroy)
+	has_many(:comments, dependent: :destroy)
 	has_many(:relationships, foreign_key: "user_id")
   has_many(:reverse_of_relationships, class_name: "Relationship", foreign_key: "follow_id")
 	has_many(:followings, through: :relationships, source: :follow)

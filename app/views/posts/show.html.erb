@@ -9,14 +9,16 @@
 				<div class="mx-4">
 					<div class="border">
 						<div class="text-left my-4 ml-3">
-							<%= link_to("/#{@post.user.username}") do %>
+							<%= link_to("/#{@post.user.username}", class: "text-decoration-none") do %>
 								<%= image_tag(@post.user.icon.to_s, size: "45x45", class: "img-fluid rounded-pill border") %>
+							<% end %>
+							<%= link_to("/#{@post.user.username}") do %>
 								<span class="text-muted pl-2">
-									<%= link_to("#{@post.user.name} (#{'@' + @post.user.username})", "/#{@post.user.username}") %>
+									<%= @post.user.name %>&nbsp;(<%= "@" + @post.user.username %>)
 								</span>
 							<% end %>
 							<span class="text-muted pl-3">
-								<%= @post.created_at.to_s(:create_birthday) %>
+								<%= @post.created_at.to_s(:create_date) %>
 							</span>
 							<span id="like_<%= @post.id %>" class="h4 pl-4">
 								 <%= render partial: 'likes/like', locals: { post: @post } %>
@@ -27,7 +29,7 @@
 						</div>
 					</div>
 					<div>
-						<div class="border p-5">
+						<div class="border p-4">
 							<%= image_tag(@post.image.to_s, class: "img-fluid img-thumbnail") %>
 						</div>
 					</div>
@@ -36,10 +38,57 @@
 							<%= @post.message %>
 						</div>
 					</div>
+					<div class="border my-5">
+						<%= form_for(@comment, url: { controller: "comments", action: "create" }, html: { class: "p-3" }) do |f| %>
+							<%= f.hidden_field :post_id, value: @post.id %>
+							<div class="h6 text-left m-2">
+								<%= link_to("/#{@post.user.username}", class: "text-decoration-none") do %>
+									<%= image_tag(session_user.icon.to_s, size: "45x45", class: "img-fluid rounded-pill border") %>
+								<% end %>
+								&nbsp;コメントを記入
+								<% if @comment.errors.any? %>
+									<% @comment.errors.full_messages.each do |error| %>
+										<span class="h5 text-danger pl-5"><%= error %></span>
+									<% end %>
+								<% end %>
+							</div>
+							<%= f.label :comment, "コメント", { class: "sr-only" } %>
+							<%= f.text_area :comment, { rows: 3, class: "form-control", placeholder: "コメントを記入" } %>
+							<div class="text-right mr-4">
+								<%= f.submit "送信", { class: "btn btn-primary mt-2" } %>
+							</div>
+						<% end %>
+					</div>
 					<div class="text-left mt-5 mx-3">
-						<div class="h6 border-bottom">
-							件のコメント
+						<div class="h6 border-bottom border-dark pb-2">
+							<%= @post.comments.length %>&nbsp;件のコメント
 						</div>
+						<% unless @post.comments.blank? %>
+							<% @post.comments.reverse_each do |post_comment| %>
+								<div class="border-bottom">
+									<div class="h6 text-left my-4 mx-2">
+										<%= link_to("/#{post_comment.user.username}", class: "text-decoration-none") do %>
+											<%= image_tag(post_comment.user.icon.to_s, size: "45x45", class: "img-fluid rounded-pill border") %>
+										<% end %>
+										<%= link_to("/#{post_comment.user.username}") do %>
+											<span class="pl-2">
+												<%= post_comment.user.name %>&nbsp;(<%= "@" + post_comment.user.username %>)
+											</span>
+										<% end %>
+										<span class="text-muted pl-3">
+											<%= post_comment.created_at.to_s(:create_date_time) %>
+										</span>
+										<div class="py-3">
+											<%= post_comment.comment %>
+										</div>
+									</div>
+								</div>
+							<% end %>
+						<% else %>
+							<div class="h6 text-center mt-5">
+								コメントはありません
+							</div>
+						<% end %>
 					</div>
 				</div>
 			</div>

@@ -35,7 +35,7 @@
 							<li class="h1"><%= user.name %></li>
 							<li class="h6"><%= link_to("@" + user.username, "/#{user.username}") %></li>
 							<% unless user.introduction.nil? %>
-								<li class="pt-4 text-left"><%= user.introduction.truncate(75) %></li>
+								<li class="pt-4 text-left"><%= user.introduction.truncate(70) %></li>
 							<% end %>
 						</ul>
 					</div>

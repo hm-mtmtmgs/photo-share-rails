@@ -12,3 +12,5 @@ ja:
         image: 投稿写真
         title: タイトル
         message: メッセージ
+      comment:
+        comment: コメント
