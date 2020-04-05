@@ -1,0 +1,104 @@
+<% provide(:title, " | ユーザー設定") %>
+
+<main class="text-center" >
+	<h1 class="h2 font-weight-normal text-muted mt-5">ユーザー設定</h1>
+
+	<% if @user.errors.any? %>
+		<div class="mt-5"></div>
+		<% @user.errors.full_messages.each do |error| %>
+			<div class="h5 text-danger pb-1"><%= error %></div>
+		<% end %>
+	<% end %>
+  
+  <div class="form-signin container">
+    <%= link_to("メールアドレスを変更", "", { class: "btn btn-lg btn-outline-primary btn-block", data: { toggle: "modal", target: "#modal_email_edit" } }) %>
+    <%= link_to("パスワードを変更", "", { class: "btn btn-lg btn-outline-primary btn-block mt-5", data: { toggle: "modal", target: "#modal_password_edit" } }) %>
+    <%= link_to("アカウントを削除", "", { class: "btn btn-lg btn-danger btn-block mt-5", data: { toggle: "modal", target: "#modal_account_delete" } }) %>
+  </div>
+  
+  <div class="modal fade" id="modal_email_edit" tabindex="-1" role="dialog" aria-labelledby="label1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="label1">メールアドレスを変更</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <%= form_for(@user, url: { controller: "users", action: "setting" }) do |f| %>
+          <div class="modal-body">
+            <div class="h6 form-signin text-left">
+              <%= f.label :email, 'メールアドレス&nbsp;<span class="text-danger">&nbsp;*</span>'.html_safe %>
+              <%= f.text_field :email, { class: "form-control", placeholder: "メールアドレス" } %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+            <%= f.submit "保存", { class: "btn btn-primary" } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal_password_edit" tabindex="-1" role="dialog" aria-labelledby="label2" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="label2">パスワードを変更</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <%= form_for(@user, url: { controller: "users", action: "setting" }) do |f| %>
+          <div class="modal-body">
+            <div class="h6 form-signin text-left">
+              <ul class="list-unstyled">
+			          <li>
+                  <%= f.label :current_password, '現在のパスワード&nbsp;<span class="text-danger">&nbsp;*</span>'.html_safe %>
+                  <%= f.password_field :current_password, { class: "form-control", placeholder: "現在のパスワード" } %>
+                </li>
+                <li class="pt-4">
+                  <%= f.label :password, '新しいパスワード&nbsp;<span class="text-danger">&nbsp;*</span>'.html_safe %>
+                  <%= f.password_field :password, { class: "form-control", placeholder: "新しいパスワード" } %>
+                </li>
+                <li class="pt-4">
+                  <%= f.label :password_confirmation, '新しいパスワード（確認用）&nbsp;<span class="text-danger">&nbsp;*</span>'.html_safe %>
+                  <%= f.password_field :password_confirmation, { class: "form-control", placeholder: "新しいパスワード（確認用）" } %>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+            <%= f.submit "保存", { class: "btn btn-primary" } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal_account_delete" tabindex="-1" role="dialog" aria-labelledby="label3" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="label3">アカウントを削除</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="h6">
+            本当に削除してもよろしいですか？<br>
+            削除したアカウントは元に戻すことができません。
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+          <%= link_to("削除", "/users/#{@user.username}/setting", { class: "btn btn-danger", method: "delete" }) %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>

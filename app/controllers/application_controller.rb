@@ -14,4 +14,12 @@ class ApplicationController < ActionController::Base
 		home_new_arrival_post
 		render template: "home/index"
 	end
+	
+	def redirect_home
+		redirect_to("/")
+	end
+	
+	def redirect_user_profile
+		redirect_to("/#{session_user.username}")
+	end
 end

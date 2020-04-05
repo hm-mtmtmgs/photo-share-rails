@@ -1,15 +1,21 @@
 <% provide(:title, " | #{@user.name}さん (@#{@user.username})") %>
-<main class="text-center" >
 
-	<% if flash[:login] || flash[:edit] || flash[:post_complete] || flash[:post_delete] || flash[:comment_delete] %>
-		<p class="text-center bg-info text-white h5 pt-2 pb-2">
+<% if flash[:login] || flash[:profile_edit] || flash[:post_complete] || flash[:post_delete] || flash[:comment_delete] || flash[:email_edit] || flash[:password_edit] %>
+	<div class="alert alert-primary alert-dismissible position-fixed text-center w-100 px-5" role="alert" id="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<div class="h5 m-0">
 			<%= flash[:login] %>
-			<%= flash[:edit] %>
+			<%= flash[:profile_edit] %>
 			<%= flash[:post_complete] %>
 			<%= flash[:post_delete] %>
 			<%= flash[:comment_delete] %>
-		</p>
-	<% end %>
+			<%= flash[:email_edit] %>
+			<%= flash[:password_edit] %>
+		</div>
+	</div>
+<% end %>
+
+<main class="text-center" >
 
 	<div class="container mt-5">
 
@@ -38,7 +44,7 @@
 			<div class="col-12 col-sm-4 py-4">
 				<% if session_user?(@user) %>
 					<%= link_to("プロフィールを編集", "/#{@user.username}/edit", { class: "btn btn-lg btn-outline-primary rounded-pill"}) %><br>
-					<%= link_to("設定", "#", { class: "btn btn-lg btn-outline-primary rounded-pill mt-3 px-5" }) %>
+					<%= link_to("設定", "/users/#{@user.username}/setting", { class: "btn btn-lg btn-outline-primary rounded-pill mt-3 px-5" }) %>
 				<% else %>
 					<div id="follow_<%= @user.id %>">
 						<%= render partial: "relationships/relationship", locals: { user: @user }  %>

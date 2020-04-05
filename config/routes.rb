@@ -19,7 +19,10 @@ Rails.application.routes.draw do
 	resources :users, param: :username, path: "/", only: [:show, :edit, :update]
 	resources :users, param: :username do
 		member do
-			get :following, :follower
+			get :following, :follower, :setting
+			post :setting
+			patch :setting
+			delete :setting
 		end
 	end
 

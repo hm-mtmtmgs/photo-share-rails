@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :login_user?, { only: [:show, :edit, :update, :logout, :search, :following, :follower] }
+	before_action :login_user?, { only: [:show, :edit, :update, :logout, :search, :following, :follower, :setting] }
 
   def show
 		user_get_from_username
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 			@user.username = SecureRandom.hex(4)
 			if @user.save
 				flash[:regist] = "ユーザー登録が完了しました。ログインして写真を投稿しよう"
-				redirect_to("/login")
+				render("login")
 			else
 				render("add")
 			end
@@ -27,9 +27,10 @@ class UsersController < ApplicationController
   end
 
 	def update
-		if session_user.update(user_params)
-			flash[:edit] = "プロフィールを更新しました"
-			redirect_to("/#{session_user.username}")
+		user_get_from_username
+		if @user.update(user_params)
+			flash[:profile_edit] = "プロフィールを更新しました"
+			redirect_user_profile
 		else
 			render("edit")
 		end
@@ -41,7 +42,7 @@ class UsersController < ApplicationController
 			if @user && @user.authenticate(params[:password])
 				session_login(@user)
 				flash[:login] = "ログインしました"
-				redirect_to("/#{@user.username}")
+				redirect_user_profile
 			else
 				if @user.nil?
 					@user = User.new(email: params[:email])
@@ -56,7 +57,7 @@ class UsersController < ApplicationController
 
 	def logout
 		session_logout
-		redirect_to("/")
+		redirect_home
 	end
 
 	def search
@@ -67,7 +68,7 @@ class UsersController < ApplicationController
 				split_keywords = params[:keywords].strip.split(/[[:blank:]]+/)
 				@users = []
 				split_keywords.each do |keyword|
-					@users += User.where("name like ? or username like ?", "%#{keyword}%", "%#{keyword}%")
+					@users += User.where("name like ? or username like ? or introduction like ?", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
 				end
 				@users.uniq!
 			end
@@ -82,6 +83,33 @@ class UsersController < ApplicationController
 
 	def follower
 		user_get_from_username
+	end
+	
+	def setting
+		user_get_from_username
+		login_user_invalid_operation_inspection(@user)
+		if request.patch?
+			logger.debug @user.errors.inspect
+			if params[:user][:email]
+				if @user.update(user_params)
+					flash[:email_edit] = "メールアドレスを更新しました"
+					redirect_user_profile
+				end
+			elsif params[:user][:current_password]
+				unless @user.authenticate(params[:user][:current_password])  
+					@user.errors.add(:base, "現在のパスワードを正しく入力してください")
+				else
+					if @user.update(user_params)
+						flash[:password_edit] = "パスワードを更新しました"
+						redirect_user_profile
+					end
+				end
+			end
+		elsif request.delete?
+			session_user.destroy
+			session_logout
+			redirect_home
+		end
 	end
 
 	private

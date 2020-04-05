@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 			@post.user_id = session[:user_id]
 			if @post.save
 				flash[:post_complete] = "写真を投稿しました"
-				redirect_to("/#{session_user.username}")
+				redirect_user_profile
 			else
 				render("add")
 			end
@@ -41,7 +41,7 @@ class PostsController < ApplicationController
 	def destroy
 		Post.find(params[:id]).destroy
 		flash[:post_delete] = "投稿を削除しました"
-		redirect_to("/#{session_user.username}")
+		redirect_user_profile
 	end
 
 	private
