@@ -1,0 +1,77 @@
+<% unless @user.post.empty? %>
+  <% @user.post.reverse_each do |user_post| %>
+    <div class="row border p-3 pb-4">
+      <div class="col-12 col-sm-2">
+        <div class="row mb-4">
+          <div class="col-6 col-sm-12">
+            <div class="mx-auto mt-4">
+              <%= user_post.created_at.to_s(:create_date) %><br>
+              <%= user_post.created_at.to_s(:create_time) %>
+            </div>
+          </div>
+          <div class="col-3 col-sm-12">
+            <div class="mx-auto mt-4">
+              <div id="like_<%= user_post.id %>" class="h4">
+                <%= render partial: 'likes/like', locals: { post: user_post } %>
+              </div>
+            </div>
+          </div>
+          <% if session_user?(@user) %>
+            <div class="col-3 col-sm-12">
+              <div class="mx-auto mt-4">
+                <%= link_to("削除", "", { class: "btn btn-outline-primary rounded-pill", data: { toggle: "modal", target: "#modal_post_delete_#{user_post.id}" } }) %>
+
+                <div class="modal fade" id="modal_post_delete_<%= user_post.id %>" tabindex="-1" role="dialog" aria-labelledby="label_<%= user_post.id %>" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="label_<%= user_post.id %>">「<%= user_post.title %>」を削除</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="h6">
+                          本当に削除してもよろしいですか？<br>
+                          削除した投稿は元に戻すことができません。
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+                        <%= link_to("削除", "/posts/delete/#{user_post.id}", { class: "btn btn-primary" }) %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-12 col-sm-3">
+        <%= link_to("/posts/show/#{user_post.id}") do %>
+          <%= image_tag(user_post.image.to_s, class: "img-fluid img-thumbnail") %>
+        <% end %>
+      </div>
+      <div class="col-12 col-sm-7">
+        <div class="text-left border mt-1 h-100">
+          <div class="border-bottom border-dark p-3">
+            タイトル&nbsp;：&nbsp;<%= user_post.title %>
+          </div>
+          <div class="p-4">
+            <%= user_post.message %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="row border">
+    <div class="col-12 col-sm-12">
+      <div class="h6 my-5">
+        投稿がありません
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -19,7 +19,10 @@ Rails.application.routes.draw do
 	resources :users, param: :username, path: "/", only: [:show, :edit, :update]
 	resources :users, param: :username do
 		member do
-			get :following, :follower
+			get :following, :follower, :setting
+			post :setting
+			patch :setting
+			delete :setting
 		end
 	end
 
@@ -27,4 +30,6 @@ Rails.application.routes.draw do
 	delete "/likes/:post_id/delete", to: "likes#destroy"
 
 	resources :relationships, only:[:create, :destroy]
+
+	resources :comments, only:[:create, :destroy]
 end

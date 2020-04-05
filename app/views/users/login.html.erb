@@ -1,10 +1,15 @@
 <% provide(:title, " | ログイン") %>
-<main class="text-center" >
-	<% if flash[:regist] %>
-		<p class="bg-info text-white h5 pt-2 pb-2">
+
+<% if flash[:regist] %>
+	<div class="alert alert-primary alert-dismissible position-fixed text-center w-100 px-5" role="alert" id="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<div class="h5 m-0 p-0">
 			<%= flash[:regist] %>
-		</p>
-	<% end %>
+		</div>
+	</div>
+<% end  %>
+	
+<main class="text-center" >	
 	<% if @error %>
 		<div class="h5 text-danger pt-5"><%= @error %></div>
 	<% end %>

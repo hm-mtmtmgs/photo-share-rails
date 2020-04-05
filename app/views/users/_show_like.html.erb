@@ -1,0 +1,51 @@
+<% unless @user.like.empty? %>
+  <% @user.like.reverse_each do |user_like| %>
+    <div class="row border p-3 pb-4">
+      <div class="col-12 col-sm-2">
+        <div class="row mb-4">
+          <div class="col-12 col-sm-12 p-0">
+            <div class="mx-auto mt-4">
+              <%= link_to("/#{user_like.post.user.username}", class: "text-decoration-none") do %>
+                <%= image_tag(user_like.post.user.icon.to_s, size: "50x50", class: "rounded-circle border") %>
+              <% end %>
+              <%= link_to("/#{user_like.post.user.username}") do %>
+                <span class="pl-2">
+                  <%= "@" + user_like.post.user.username %>
+                </span>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-12 col-sm-12">
+            <div class="mx-auto mt-4">
+              <%= user_like.post.created_at.to_s(:create_date) %><br class="d-none d-sm-block">
+              <%= user_like.post.created_at.to_s(:create_time) %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-3">
+        <%= link_to("/posts/show/#{user_like.post.id}") do %>
+          <%= image_tag(user_like.post.image.to_s, class: "img-fluid img-thumbnail") %>
+        <% end %>
+      </div>
+      <div class="col-12 col-sm-7">
+        <div class="text-left border mt-1 h-100">
+          <div class="border-bottom border-dark p-3">
+            タイトル&nbsp;：&nbsp;<%= user_like.post.title %>
+          </div>
+          <div class="p-4">
+            <%= user_like.post.message %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="row border">
+    <div class="col-12 col-sm-12">
+      <div class="h6 my-5">
+        いいねがありません
+      </div>
+    </div>
+  </div>
+<% end %>
