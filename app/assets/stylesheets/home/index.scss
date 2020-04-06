@@ -37,3 +37,26 @@
 .jumbotron .container {
   max-width: 40rem;
 }
+
+#page-top {
+	position: fixed;
+	bottom: 35px;
+	right: 20px;
+	font-size: 25px;
+}
+ 
+#page-top a {
+	display: block;
+	background: #666;
+	color: #fff;
+	width: 80px;
+	padding: 15px 0;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 10px;
+}
+ 
+#page-top a:hover {
+	background: #999;
+	text-decoration: none;
+}
