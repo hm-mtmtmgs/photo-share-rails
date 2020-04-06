@@ -10,6 +10,11 @@ Rails.application.routes.draw do
 	post "posts/add", to: "posts#add"
   get "posts/edit"
 	get "posts/delete/:id", to: "posts#destroy"
+	resources :posts do
+		member do
+			get :like
+		end
+	end
 
   get "users/search", to: "users#search"
 	post "users/search", to: "users#search"

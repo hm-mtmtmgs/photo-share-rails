@@ -2,7 +2,7 @@ class PostsController < ApplicationController
 	before_action :login_user?, { only: [:show, :add, :search, :destroy] }
 
   def show
-		@post = Post.find(params[:id])
+		post_get_from_id
 		@comment = Comment.new
   end
 
@@ -39,13 +39,21 @@ class PostsController < ApplicationController
 	end
 
 	def destroy
-		Post.find(params[:id]).destroy
+		post_get_from_id.destroy
 		flash[:post_delete] = "投稿を削除しました"
 		redirect_user_profile
+	end
+	
+	def like
+		post_get_from_id
 	end
 
 	private
 	def post_params
 		params.require(:post).permit(:image, :title, :message)
+	end
+	
+	def post_get_from_id
+		@post = Post.find(params[:id])
 	end
 end
