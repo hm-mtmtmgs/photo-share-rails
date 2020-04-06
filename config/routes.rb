@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  root "home#index"
+	root "home#index"
+	
+	resources :ranking, only:[:index]
 
 	get "posts/search", to: "posts#search"
 	post "posts/search", to: "posts#search"
