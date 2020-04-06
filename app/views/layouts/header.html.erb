@@ -10,20 +10,30 @@
 		<div class="collapse navbar-collapse" id="navbarNav3">
 				<ul class="navbar-nav ml-auto">
 						<li class="nav-item">
-								<%= link_to("ランキング", "/ranking", { class: "nav-link"}) %>
+								<%= link_to("/ranking", { class: "nav-link pr-3"}) do %>
+									<i class="fas fa-crown pr-1"></i>ランキング
+								<% end %>
 						</li>
 						<% if session_now? %>
 							<li class="nav-item">
-								<%= link_to("投稿検索", "/posts/search", { class: "nav-link"}) %>
+								<%= link_to("/posts/search", { class: "nav-link pr-3"}) do %>
+									<i class="fas fa-search"></i><i class="fas fa-paste pr-1"></i>投稿検索
+								<% end %>
 							</li>
 							<li class="nav-item">
-								<%= link_to("ユーザー検索", "/users/search", { class: "nav-link"}) %>
+								<%= link_to("/users/search", { class: "nav-link pr-3"}) do %>
+									<i class="fas fa-search"></i><i class="far fa-user pr-1"></i></i>ユーザー検索
+								<% end %>
 							</li>
 							<li class="nav-item">
-								<%= link_to("ログアウト", "/logout", { class: "nav-link", method: :delete }) %>
+								<%= link_to("/logout", { class: "nav-link pr-3", method: :delete }) do %>
+									<i class="fas fa-sign-out-alt pr-1"></i>ログアウト
+								<% end %>
 							</li>
 							<li class="nav-item">
-								<%= link_to("新規投稿", "/posts/add", { class: "nav-link"}) %>
+								<%= link_to("/posts/add", { class: "nav-link pr-3"}) do %>
+									<i class="far fa-edit pr-1"></i>新規投稿
+								<% end %>
 							</li>
 							<li class="nav-item">
 								<a href="/<%= session_user.username %>" class="nav-link">
@@ -34,10 +44,14 @@
 						<% end %>
 						<% if !session_now? %>
 							<li class="nav-item">
-								<%= link_to("ログイン", "/login", { class: "nav-link"}) %>
+								<%= link_to("/login", { class: "nav-link pr-3"}) do %>
+									<i class="fas fa-sign-in-alt pr-1"></i>ログイン
+								<% end %>
 							</li>
 							<li class="nav-item">
-								<%= link_to("新規登録", "/signup", { class: "nav-link"}) %>
+								<%= link_to("/signup", { class: "nav-link pr-3"}) do %>
+									<i class="fas fa-user-plus pr-1"></i>新規登録
+								<% end %>
 							</li>
 						<% end %>
 				</ul>
