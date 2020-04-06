@@ -2,23 +2,28 @@
   <% @user.comments.reverse_each do |user_comment| %>
     <div class="row border p-3 pb-4">
       <div class="col-12 col-sm-2">
-        <div class="row mb-4">
-          <div class="col-12 col-sm-12 p-0">
+        <div class="row">
+          <div class="mx-auto mt-4">
+            <%= link_to("/#{user_comment.post.user.username}", class: "text-decoration-none") do %>
+              <%= image_tag(user_comment.post.user.icon.to_s, size: "50x50", class: "rounded-circle border") %>
+            <% end %>
+            <%= link_to("/#{user_comment.post.user.username}") do %>
+              <span class="pl-2">
+                <%= "@" + user_comment.post.user.username %>
+              </span>
+            <% end %>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-7 col-sm-12">
             <div class="mx-auto mt-4">
-              <%= link_to("/#{user_comment.post.user.username}", class: "text-decoration-none") do %>
-                <%= image_tag(user_comment.post.user.icon.to_s, size: "50x50", class: "rounded-circle border") %>
-              <% end %>
-              <%= link_to("/#{user_comment.post.user.username}") do %>
-                <span class="pl-2">
-                  <%= "@" + user_comment.post.user.username %>
-                </span>
-              <% end %>
+              <%= user_comment.post.created_at.to_s(:create_date) %><br>
+              <%= user_comment.post.created_at.to_s(:create_time) %>
             </div>
           </div>
-          <div class="col-12 col-sm-12">
-            <div class="mx-auto mt-4">
-              <%= user_comment.post.created_at.to_s(:create_date) %><br class="d-none d-sm-block">
-              <%= user_comment.post.created_at.to_s(:create_time) %>
+          <div class="col-5 col-sm-12">
+            <div id="like_<%= user_comment.id %>" class="h4 mx-auto mt-4">
+              <%= render partial: 'likes/like', locals: { post: user_comment.post } %>
             </div>
           </div>
         </div>
@@ -29,48 +34,51 @@
         <% end %>
       </div>
       <div class="col-12 col-sm-7">
-        <div class="text-left border mt-1 h-100">
-          <div class="border-bottom border-dark px-3 py-2">
-            <div class="row">
-              <div class="col-9 col-sm-10 m-auto">
-                <%= user_comment.created_at.to_s(:create_date_time) %>
-              </div>
-              <div class="col-3 col-sm-2">
-                <% if session_user?(@user) %>
-                  <%= link_to("削除", "", { class: "btn btn-outline-primary rounded-pill", data: { toggle: "modal", target: "#modal_comment_delete_#{user_comment.id}" } }) %>
+        <div class="card border-secondary post-card">
+          <div class="card-header py-2">
+            <div class="h6 m-0">
+              <div class="row">
+                <div class="col-8 pt-2">
+                  <%= user_comment.created_at.to_s(:create_date) %>&nbsp;<br class="d-sm-none">
+                  <%= user_comment.created_at.to_s(:create_time) %>
+                </div>
+                <div class="col-4">
+                  <% if session_user?(@user) %>
+                    <%= link_to("削除", "", { class: "btn btn-sm btn-outline-primary rounded-pill float-right", data: { toggle: "modal", target: "#modal_comment_delete_#{user_comment.id}" } }) %>
 
-                  <div class="modal fade" id="modal_comment_delete_<%= user_comment.id %>" tabindex="-1" role="dialog" aria-labelledby="label_<%= user_comment.id %>" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="label_<%= user_comment.id %>">コメントを削除</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <div class="h6 text-center">
-                            本当に削除してもよろしいですか？<br>
-                            削除したコメントは元に戻すことができません。
+                    <div class="modal fade" id="modal_comment_delete_<%= user_comment.id %>" tabindex="-1" role="dialog" aria-labelledby="label_<%= user_comment.id %>" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="label_<%= user_comment.id %>">コメントを削除</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
                           </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
-                            <%= form_for(user_comment, html: { method: :delete }) do |f| %>
-                            <%= f.hidden_field :id, value: user_comment.id %>
-                            <%= f.submit "削除", { class: "btn btn-primary" } %>
-                          <% end %>
+                          <div class="modal-body">
+                            <div class="h6 text-center">
+                              本当に削除してもよろしいですか？<br>
+                              削除したコメントは元に戻すことができません。
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+                              <%= form_for(user_comment, html: { method: :delete }) do |f| %>
+                              <%= f.hidden_field :id, value: user_comment.id %>
+                              <%= f.submit "削除", { class: "btn btn-primary" } %>
+                            <% end %>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                <% end %>
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>
-          <div class="p-4">
-            <%= user_comment.comment %>
+          <div class="card-body">
+            <p class="card-text"><%= user_comment.comment %></p>
           </div>
         </div>
       </div>

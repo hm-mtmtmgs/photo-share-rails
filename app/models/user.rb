@@ -26,7 +26,7 @@ class User < ApplicationRecord
 
 	validates :username, { presence: { message: "を入力してください" },
 												 uniqueness: { message: "は既に使用されています", allow_blank: true },
-												 length: { maximum: 16, message: "は16文字以内で入力してください", allow_blank: true },
+												 length: { maximum: 12, message: "は12文字以内で入力してください", allow_blank: true },
 											   format: { with: /[0-9a-zA-Z]/, message: "は半角英数字で入力してください", allow_blank: true } }
 
 	validates :email, { presence: { message: "を入力してください" },
