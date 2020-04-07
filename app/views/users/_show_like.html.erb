@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="col-12 col-sm-3">
-        <%= link_to("/posts/show/#{user_like.post.id}") do %>
+        <%= link_to("/posts/#{user_like.post.id}") do %>
           <%= image_tag(user_like.post.image.to_s, class: "img-fluid img-thumbnail") %>
         <% end %>
       </div>

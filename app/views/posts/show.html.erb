@@ -100,10 +100,10 @@
 					<%= link_to(@post.user.name, "/#{@post.user.username}") %>さんのその他の投稿
 				</div>
 				<div class="px-3 pt-2 border">
-					<% unless @post.user.post.present? %>
-						<% user_new_arrival_post.each do |user_post| %>
+					<% unless user_other_post.blank? %>
+						<% user_new_arrival_other_post.each do |user_post| %>
 							<div class="px-2 py-3">
-								<%= link_to("/posts/show/#{user_post.id}") do %>
+								<%= link_to("/posts/#{user_post.id}") do %>
 									<%= image_tag(user_post.image.to_s, class: "img-fluid img-thumbnail border") %>
 									<div class="text-left mt-2 ml-2">
 										<%= user_post.title %>

@@ -6,7 +6,7 @@
 			<div class="h5 text-danger pb-1"><%= error %></div>
 		<% end %>
 	<% end %>
-	<%= form_for(@user, url: { controller: "users", action: "add" }, html: { class: "form-signin container" }) do |f| %>
+	<%= form_for(@user, url: { controller: "users", action: "create" }, html: { class: "form-signin container" }) do |f| %>
 		<%= image_tag("/images/common/logo_black.png", size: "402x102", class: "img-fluid mb-4") %>
 		<h1 class="h4 mb-4 font-weight-normal text-muted">登録して写真を投稿しよう</h1>
 		<%= f.label :name, "アイコン", { class: "sr-only" } %>

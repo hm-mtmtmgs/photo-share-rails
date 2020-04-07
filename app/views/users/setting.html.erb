@@ -95,7 +95,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
-          <%= link_to("削除", "/users/#{@user.username}/setting", { class: "btn btn-danger", method: "delete" }) %>
+          <%= link_to("削除", "/#{@user.username}/setting", { class: "btn btn-danger", method: "delete" }) %>
         </div>
       </div>
     </div>

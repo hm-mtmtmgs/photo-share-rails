@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 		@comment = Comment.new(comment_params)
 		@comment.user_id = session_user.id
 		if @comment.save
-			redirect_to("/posts/show/#{set_post.id}")
+			redirect_to("/posts/#{set_post.id}")
 		else
 			render template: "posts/show", collection: set_post
 		end

@@ -1,12 +1,12 @@
 class PostsController < ApplicationController
-	before_action :login_user?, { only: [:show, :add, :search, :destroy] }
+	before_action :login_user?, { only: [:show, :create, :search, :destroy] }
 
   def show
 		post_get_from_id
 		@comment = Comment.new
   end
 
-  def add
+  def create
 		if request.post?
 			@post = Post.new(post_params)
 			@post.user_id = session[:user_id]
@@ -14,7 +14,7 @@ class PostsController < ApplicationController
 				flash[:post_complete] = "写真を投稿しました"
 				redirect_user_profile
 			else
-				render("add")
+				render("create")
 			end
 		else
 			@post = Post.new

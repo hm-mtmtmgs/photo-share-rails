@@ -5,7 +5,7 @@
 
 //= require users/show
 //= require users/edit
-//= require posts/add
+//= require posts/create
 //= require home/index
 
 $(document).ready(function() {
