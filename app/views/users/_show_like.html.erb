@@ -22,7 +22,7 @@
             </div>
           </div>
           <div class="col-5 col-sm-12">
-            <div id="like_<%= user_like.id %>" class="h4 mx-auto mt-4">
+            <div id="like_user_show_like_<%= user_like.post.id %>" class="h4 mx-auto mt-4">
               <%= render partial: 'likes/like', locals: { post: user_like.post } %>
             </div>
           </div>

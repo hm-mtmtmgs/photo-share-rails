@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-		 home_new_arrival_post
+    @posts = Post.all.order("created_at desc").limit(12)
   end
 end

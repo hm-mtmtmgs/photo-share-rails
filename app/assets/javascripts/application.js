@@ -6,6 +6,7 @@
 //= require users/show
 //= require users/edit
 //= require posts/add
+//= require home/index
 
 $(document).ready(function() {
   $(window).load(function() {

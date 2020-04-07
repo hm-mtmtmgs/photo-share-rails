@@ -1,8 +1,8 @@
 <header class="sticky-top">
 
-	<nav class="navbar navbar-expand-xl sticky-top navbar-dark bg-dark pt-3 pb-3">
+	<nav class="navbar navbar-expand-xl sticky-top navbar-dark bg-dark py-3">
 
-		<%= link_to(image_tag("/images/common/logo_gray.png", size: "148x37", class: "img-fluid"), "/") %>
+		<%= link_to(image_tag("/images/common/logo_gray.png", size: "148x37", class: "img-fluid pb-2 pr-2"), "/") %>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav3" aria-controls="navbarNav3" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 		</button>
@@ -11,28 +11,28 @@
 				<ul class="navbar-nav ml-auto">
 						<li class="nav-item">
 								<%= link_to("/ranking", { class: "nav-link pr-3"}) do %>
-									<i class="fas fa-crown pr-1"></i>ランキング
+									<i class="fas fa-crown pr-2"></i>ランキング
 								<% end %>
 						</li>
 						<% if session_now? %>
 							<li class="nav-item">
 								<%= link_to("/posts/search", { class: "nav-link pr-3"}) do %>
-									<i class="fas fa-search"></i><i class="fas fa-paste pr-1"></i>投稿検索
+									<i class="fas fa-search"></i><i class="fas fa-paste pr-2"></i>投稿検索
 								<% end %>
 							</li>
 							<li class="nav-item">
 								<%= link_to("/users/search", { class: "nav-link pr-3"}) do %>
-									<i class="fas fa-search"></i><i class="far fa-user pr-1"></i></i>ユーザー検索
+									<i class="fas fa-search"></i><i class="far fa-user pr-2"></i></i>ユーザー検索
 								<% end %>
 							</li>
 							<li class="nav-item">
 								<%= link_to("/logout", { class: "nav-link pr-3", method: :delete }) do %>
-									<i class="fas fa-sign-out-alt pr-1"></i>ログアウト
+									<i class="fas fa-sign-out-alt pr-2"></i>ログアウト
 								<% end %>
 							</li>
 							<li class="nav-item">
 								<%= link_to("/posts/add", { class: "nav-link pr-3"}) do %>
-									<i class="far fa-edit pr-1"></i>新規投稿
+									<i class="far fa-edit pr-2"></i>新規投稿
 								<% end %>
 							</li>
 							<li class="nav-item">
@@ -45,12 +45,12 @@
 						<% if !session_now? %>
 							<li class="nav-item">
 								<%= link_to("/login", { class: "nav-link pr-3"}) do %>
-									<i class="fas fa-sign-in-alt pr-1"></i>ログイン
+									<i class="fas fa-sign-in-alt pr-2"></i>ログイン
 								<% end %>
 							</li>
 							<li class="nav-item">
 								<%= link_to("/signup", { class: "nav-link pr-3"}) do %>
-									<i class="fas fa-user-plus pr-1"></i>新規登録
+									<i class="fas fa-user-plus pr-2"></i>新規登録
 								<% end %>
 							</li>
 						<% end %>
