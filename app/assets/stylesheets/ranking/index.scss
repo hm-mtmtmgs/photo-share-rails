@@ -1,0 +1,20 @@
+.gold {
+  color: #DA8E00;
+  background: -webkit-linear-gradient(-45deg, #F7DE05, #DA8E00, #EDAC06, #F7DE05, #ECB802, #DAAF08, #B67B03, #DA8E00, #EDAC06, #F7DE05, #ECB802, #EDAC06);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.silver {
+  color: #999793;
+  background: -webkit-linear-gradient(-45deg, #dfdedb, #a09f9c, #727170, #d3d2cd, #c1bfb9, #72716e, #aca9a3, #aaa69e, #cfccc4, #979791, #868684, #8b8b858f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bronze {
+  color: #b65815;
+  background: -webkit-linear-gradient(-45deg, #a88065, #b95e1e, #b65815, #b99072, #ad7247, #b25410, #b9855f, #b1591a, #b86b35, #aa8b75, #c46420, #b65815);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

@@ -23,16 +23,27 @@
 
 	<div class="album py-5 bg-light">
 		<div class="container">
-			
+		
+			<div class="h3 my-4 border-bottom border-secondary">
+				<span class="ml-3">最新の投稿</span>
+				<span class="badge badge-info mb-2 ml-2">New</span>
+			</div>
+
 			<div class="row" id="home-carousel">
 				<div id="carouselPlus" class="carousel slide multi-carousel" data-ride="carousel" data-interval=9000 data-pause="false">
 					<div class="carousel-inner">
 						<% @posts.each do |post| %>
 							<div class="carousel-grid col-12 col-sm-4 px-2">
 								<div class="card">
-									<%= image_tag(post.image.to_s, class: "d-block border w-100") %>
+									<% if session_now? %>
+										<%= link_to("/posts/#{post.id}") do %>
+											<%= image_tag(post.image.to_s, class: "d-block border w-100") %>
+										<% end %>
+									<% else %>
+										<%= image_tag(post.image.to_s, class: "d-block border w-100") %>
+									<% end %>
 									<div class="card-body">
-										<p class="card-text">
+										<p class="card-text font-weight-bold">
 											<%= post.title.truncate(22) %>
 										</p>
 										<div class="d-flex justify-content-between align-items-center">

@@ -4,7 +4,7 @@ body, .album, .container {
 	background: linear-gradient(to right, rgb(243, 243, 243), rgb(241, 244, 244));
 }
 
-.border, input, textarea, .btn-group, .btn-outline-primary {
+.border, input, textarea, .btn-group, .btn-outline-primary, .btn-outline-success {
 	border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
 	border-color: #aebecc !important;
 	background: #FFFFFF;

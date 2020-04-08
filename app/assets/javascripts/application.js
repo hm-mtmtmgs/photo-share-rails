@@ -7,6 +7,7 @@
 //= require users/edit
 //= require posts/create
 //= require home/index
+//= require ranking/index
 
 $(document).ready(function() {
   $(window).load(function() {
