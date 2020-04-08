@@ -1,0 +1,17 @@
+@media (max-width: 576px) {
+	.post-card {
+		height: 220px;
+		margin: 10px 0;
+		text-align: left;
+		overflow: auto
+	}
+}
+
+@media (min-width: 576px) {
+	.post-card {
+		height: 100%;
+		margin-top: 10px 0;
+		text-align: left;
+		overflow: auto
+	}
+}

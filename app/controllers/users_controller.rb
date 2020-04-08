@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 		@post = Post.all
   end
 
-  def add
+  def create
 		if request.post?
 			@user = User.new(user_params)
 			@user.username = SecureRandom.hex(4)
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 				flash[:regist] = "ユーザー登録が完了しました。ログインして写真を投稿しよう"
 				render("login")
 			else
-				render("add")
+				render("create")
 			end
 		else
 			@user = User.new

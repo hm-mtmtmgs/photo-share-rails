@@ -8,7 +8,7 @@
 			<div class="col-12 col-sm-8">
 				<div class="mx-4">
 					<div class="border">
-						<div class="text-left my-4 ml-3">
+						<div class="text-left my-4 mx-3">
 							<%= link_to("/#{@post.user.username}", class: "text-decoration-none") do %>
 								<%= image_tag(@post.user.icon.to_s, size: "45x45", class: "img-fluid rounded-pill border") %>
 							<% end %>
@@ -17,13 +17,14 @@
 									<%= @post.user.name %>&nbsp;(<%= "@" + @post.user.username %>)
 								</span>
 							<% end %>
-							<span class="text-muted pl-3">
+							<br class="d-sm-none">
+							<span class="text-muted pl-4">
 								<%= @post.created_at.to_s(:create_date) %>
 							</span>
-							<span id="like_<%= @post.id %>" class="h4 pl-4">
-								 <%= render partial: 'likes/like', locals: { post: @post } %>
+							<span id="like_<%= @post.id %>" class="h4 pl-3">
+								<%= render partial: 'likes/like', locals: { post: @post } %>
 							</span>
-							<div class="h4 text-left mt-4 ml-2">
+							<div class="h4 text-left mt-4">
 								<%= @post.title %>
 							</div>
 						</div>
@@ -34,7 +35,7 @@
 						</div>
 					</div>
 					<div class="border">
-						<div class="text-left m-4">
+						<div class="m-4 px-1 post-card">
 							<%= @post.message %>
 						</div>
 					</div>
@@ -61,11 +62,11 @@
 					</div>
 					<div class="text-left mt-5 mx-3">
 						<div class="h6 border-bottom border-dark pb-2">
-							<%= @post.comments.length %>&nbsp;件のコメント
+							<span class="h5 m-0 px-2"><%= @post.comments.length %></span>件のコメント
 						</div>
 						<% unless @post.comments.blank? %>
 							<% @post.comments.reverse_each do |post_comment| %>
-								<div class="border-bottom">
+								<div class="border-bottom border-muted">
 									<div class="h6 text-left my-4 mx-2">
 										<%= link_to("/#{post_comment.user.username}", class: "text-decoration-none") do %>
 											<%= image_tag(post_comment.user.icon.to_s, size: "45x45", class: "img-fluid rounded-pill border") %>
@@ -75,7 +76,8 @@
 												<%= post_comment.user.name %>&nbsp;(<%= "@" + post_comment.user.username %>)
 											</span>
 										<% end %>
-										<span class="text-muted pl-3">
+										<br class="d-sm-none">
+										<span class="text-muted pl-4">
 											<%= post_comment.created_at.to_s(:create_date_time) %>
 										</span>
 										<div class="py-3">
@@ -98,10 +100,10 @@
 					<%= link_to(@post.user.name, "/#{@post.user.username}") %>さんのその他の投稿
 				</div>
 				<div class="px-3 pt-2 border">
-					<% unless @post.user.post.present? %>
-						<% user_new_arrival_post.each do |user_post| %>
+					<% unless user_other_post.blank? %>
+						<% user_new_arrival_other_post.each do |user_post| %>
 							<div class="px-2 py-3">
-								<%= link_to("/posts/show/#{user_post.id}") do %>
+								<%= link_to("/posts/#{user_post.id}") do %>
 									<%= image_tag(user_post.image.to_s, class: "img-fluid img-thumbnail border") %>
 									<div class="text-left mt-2 ml-2">
 										<%= user_post.title %>

@@ -1,34 +1,46 @@
 Rails.application.routes.draw do
-  root "home#index"
+	root "home#index"
+	
+	resources :ranking, only:[:index]
 
-	get "posts/search", to: "posts#search"
-	post "posts/search", to: "posts#search"
-  get "posts/show/:id", to: "posts#show"
-  get "posts/add", to: "posts#add"
-	post "posts/add", to: "posts#add"
-  get "posts/edit"
-	get "posts/delete/:id", to: "posts#destroy"
+	resources :posts do
+		collection do
+			get :create, :search
+			post :search
+		end
+		member do
+			get :like, :show
+		end
+	end
 
-  get "users/search", to: "users#search"
-	post "users/search", to: "users#search"
-  get "signup", to: "users#add"
-	post "signup", to: "users#add"
+	resources :users do
+		collection do
+			get :signup, :search
+			post :signup, :search
+		end
+	end
+	
+	get "signup", to: "users#create"
+	post "signup", to: "users#create"
 	get "login", to: "users#login"
 	post "login", to: "users#login"
 	delete "logout", to: "users#logout"
-	resources :users, param: :username, path: "/", only: [:show, :edit, :update]
-	resources :users, param: :username do
+	
+	resources :users, param: :username, path: "/" do
 		member do
-			get :following, :follower, :setting
+			get :show, :edit, :following, :follower, :setting
 			post :setting
 			patch :setting
 			delete :setting
 		end
 	end
-
-	post "/likes/:post_id/create", to: "likes#create"
-	delete "/likes/:post_id/delete", to: "likes#destroy"
-
+	
+	resources :likes, param: :post_id do
+		member do
+			post :create
+		end
+	end
+			
 	resources :relationships, only:[:create, :destroy]
 
 	resources :comments, only:[:create, :destroy]

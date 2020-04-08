@@ -1,0 +1,49 @@
+<% provide(:title, " | 「#{@post.title}」をいいねしているユーザー") %>
+<main class="text-center" >
+
+	<div class="container mt-5">
+
+		<h1 class="h2 font-weight-normal text-muted mb-5">「<%= @post.title %>」<br class="d-sm-none">をいいねしているユーザー</h1>
+
+		<% unless @post.likes.empty? %>
+			<% @post.likes.each do |post_like| %>
+				<div class="row border mx-2 py-3">
+					<div class="col-12 col-sm-4 py-3">
+						<%= link_to(image_tag(post_like.user.icon.to_s, size: "180x180", class: "img-fluid rounded-circle border"), "/#{post_like.user.username}") %>
+						<div class="pt-3">
+							<div id="follow_<%= post_like.user.id %>_count">
+								<%= render partial: "relationships/count", locals: { user: post_like.user } %>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-sm-5">
+						<ul class="list-unstyled pt-4">
+							<li class="h1"><%= post_like.user.name %></li>
+							<li class="h6"><%= link_to("@" + post_like.user.username, "/#{post_like.user.username}") %></li>
+							<% unless post_like.user.introduction.nil? %>
+								<li class="pt-4 text-left"><%= post_like.user.introduction.truncate(75) %></li>
+							<% end %>
+						</ul>
+					</div>
+					<div class="col-12 col-sm-3 pt-4">
+						<% unless session_user?(post_like.user) %>
+							<div id="follow_<%= post_like.user.id %>">
+								<%= render partial: "relationships/relationship", locals: { user: post_like.user }  %>
+							</div>
+						<% end %>
+					</div>
+				</div>
+			<% end %>
+		<% else %>
+			<div class="row border mx-2">
+				<div class="col-12 col-sm-12">
+					<div class="h6 my-5">
+						いいねをしているユーザーがいません
+					</div>
+				</div>
+			</div>
+		<% end %>
+
+	</div>
+
+</main>

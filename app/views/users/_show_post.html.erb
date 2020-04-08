@@ -38,7 +38,7 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
-                        <%= link_to("削除", "/posts/delete/#{user_post.id}", { class: "btn btn-primary" }) %>
+                        <%= link_to("削除", "/posts/#{user_post.id}", { class: "btn btn-primary", method: "delete" }) %>
                       </div>
                     </div>
                   </div>
@@ -50,17 +50,17 @@
         </div>
       </div>
       <div class="col-12 col-sm-3">
-        <%= link_to("/posts/show/#{user_post.id}") do %>
+        <%= link_to("/posts/#{user_post.id}") do %>
           <%= image_tag(user_post.image.to_s, class: "img-fluid img-thumbnail") %>
         <% end %>
       </div>
       <div class="col-12 col-sm-7">
-        <div class="text-left border mt-1 h-100">
-          <div class="border-bottom border-dark p-3">
-            タイトル&nbsp;：&nbsp;<%= user_post.title %>
+        <div class="card border-secondary post-card">
+          <div class="card-header">
+            <div class="h5 m-0"><%= user_post.title %></div>
           </div>
-          <div class="p-4">
-            <%= user_post.message %>
+          <div class="card-body">
+            <p class="card-text"><%= user_post.message %></p>
           </div>
         </div>
       </div>

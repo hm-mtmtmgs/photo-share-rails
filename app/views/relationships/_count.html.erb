@@ -1,11 +1,11 @@
-<%= link_to("/users/#{user.username}/following") do %>
+<%= link_to("/#{user.username}/following") do %>
 	<span class="text-dark">
 		<span class="h4 pl-3"><%= user.followings.count %></span>
 		&nbsp;フォロー
 	</span>
 <% end %>
 
-<%= link_to("/users/#{user.username}/follower") do %>
+<%= link_to("/#{user.username}/follower") do %>
 	<span class="text-dark">
 		<span class="h4 pl-4"><%= user.followers.count %></span>
 		&nbsp;フォロワー

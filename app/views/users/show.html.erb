@@ -41,10 +41,10 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-12 col-sm-4 py-4">
+			<div class="col-12 col-sm-4 pt-5 pb-4">
 				<% if session_user?(@user) %>
 					<%= link_to("プロフィールを編集", "/#{@user.username}/edit", { class: "btn btn-lg btn-outline-primary rounded-pill"}) %><br>
-					<%= link_to("設定", "/users/#{@user.username}/setting", { class: "btn btn-lg btn-outline-primary rounded-pill mt-3 px-5" }) %>
+					<%= link_to("設定", "/#{@user.username}/setting", { class: "btn btn-lg btn-outline-primary rounded-pill mt-3 px-5" }) %>
 				<% else %>
 					<div id="follow_<%= @user.id %>">
 						<%= render partial: "relationships/relationship", locals: { user: @user }  %>
