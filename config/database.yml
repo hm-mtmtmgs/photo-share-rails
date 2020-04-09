@@ -25,6 +25,7 @@ test:
 
 production:
   <<: *default
-  database: rails_portfolio_production
-  username: root
-  password: <%= ENV['DATABASE_PASSWORD'] %>
+  database: <%= ENV['DB_NAME'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOSTNAME'] %>

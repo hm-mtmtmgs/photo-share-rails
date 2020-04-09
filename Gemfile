@@ -5,8 +5,8 @@ ruby '2.6.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
+# Use mysql as the database for Active Record
+gem 'mysql2'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
@@ -28,19 +28,9 @@ gem 'bcrypt', '~> 3.1.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
-gem 'bootstrap', '~> 4.3.1'
-
-gem 'jquery-rails'
-
-gem 'rails-i18n'
-
-gem 'font-awesome-sass', '~> 5.9.0'
-
-gem 'carrierwave'
-
-gem 'mini_magick'
-
-gem 'mysql2'
+group :production do
+  gem 'unicorn'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -66,3 +56,11 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'bootstrap', '~> 4.3.1'
+gem 'jquery-rails'
+gem 'rails-i18n'
+gem 'font-awesome-sass', '~> 5.9.0'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'dotenv-rails'
