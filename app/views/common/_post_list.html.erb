@@ -1,15 +1,15 @@
 <div class="row border p-3 pb-4">
 
-  <div class="col-12 col-sm-2">
+  <div class="col-12 col-md-2">
     <% if type == "user_show_post" %>
       <div class="row mb-4">
-        <div class="col-6 col-sm-12">
+        <div class="col-6 col-md-12">
           <div class="mx-auto mt-4">
             <%= one_post_in_list.created_at.to_s(:create_date) %><br>
             <%= one_post_in_list.created_at.to_s(:create_time) %>
           </div>
         </div>
-        <div class="col-3 col-sm-12">
+        <div class="col-3 col-md-12">
           <div class="mx-auto mt-4">
             <div id="like_user_show_post<%= one_post_in_list.id %>" class="h4">
               <%= render partial: 'likes/like', locals: { post: one_post_in_list } %>
@@ -17,7 +17,7 @@
           </div>
         </div>
         <% if session_user?(@user) %>
-          <div class="col-3 col-sm-12">
+          <div class="col-3 col-md-12">
             <div class="mx-auto mt-4">
               <%= link_to("削除", "", { class: "btn btn-outline-primary rounded-pill", data: { toggle: "modal", target: "#modal_delete_post_#{one_post_in_list.id}" } }) %>
 
@@ -41,13 +41,13 @@
         </div>
       </div>
       <div class="row mb-3">
-        <div class="col-7 col-sm-12">
+        <div class="col-7 col-md-12">
           <div class="mx-auto mt-4">
             <%= one_post_in_list.created_at.to_s(:create_date) %><br>
             <%= one_post_in_list.created_at.to_s(:create_time) %>
           </div>
         </div>
-        <div class="col-5 col-sm-12">
+        <div class="col-5 col-md-12">
           <div id="like_<%= type %><%= one_post_in_list.id %>" class="h4 mx-auto mt-4">
             <%= render partial: 'likes/like', locals: { post: one_post_in_list } %>
           </div>
@@ -56,13 +56,13 @@
     <% end %>
   </div>
   
-  <div class="col-12 col-sm-3">
+  <div class="col-12 col-md-3">
     <%= link_to("/posts/#{one_post_in_list.id}") do %>
       <%= image_tag(one_post_in_list.image.to_s, class: "img-fluid img-thumbnail") %>
     <% end %>
   </div>
   
-  <div class="col-12 col-sm-7">
+  <div class="col-12 col-md-7">
     <div class="card border-secondary post-card">
       <% if type == "user_show_comment" %>
         <div class="card-header py-2">

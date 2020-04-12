@@ -1,5 +1,5 @@
 <div class="row border mx-2 py-3">
-  <div class="col-12 col-sm-4 py-3">
+  <div class="col-12 col-md-4 py-3">
     <%= link_to(image_tag(one_user_in_list.icon.to_s, size: "180x180", class: "img-fluid rounded-circle border"), "/#{one_user_in_list.username}") %>
     <div class="pt-3">
       <div id="follow_<%= one_user_in_list.id %>_count">
@@ -7,16 +7,16 @@
       </div>
     </div>
   </div>
-  <div class="col-12 col-sm-5">
+  <div class="col-12 col-md-5">
     <ul class="list-unstyled pt-4">
-      <li class="h1"><%= one_user_in_list.name %></li>
-      <li class="h6"><%= link_to("@" + one_user_in_list.username, "/#{one_user_in_list.username}") %></li>
+      <li class="h2"><%= one_user_in_list.name %></li>
+      <li class="h5 pt-2"><%= link_to("@" + one_user_in_list.username, "/#{one_user_in_list.username}") %></li>
       <% unless one_user_in_list.introduction.nil? %>
         <li class="pt-4 text-left"><%= one_user_in_list.introduction.truncate(75) %></li>
       <% end %>
     </ul>
   </div>
-  <div class="col-12 col-sm-3 pt-4">
+  <div class="col-12 col-md-3 pt-4">
     <% unless session_user?(one_user_in_list) %>
       <div id="follow_<%= one_user_in_list.id %>">
         <%= render partial: "relationships/relationship", locals: { user: one_user_in_list }  %>

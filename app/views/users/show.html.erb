@@ -20,41 +20,45 @@
 	<div class="container mt-5">
 
 		<div class="row border border-bottom-0">
-			<div class="col-12 col-sm-4 pt-3">
-				<%= image_tag(@user.icon.to_s, size: "200x200", class: "rounded-circle border") %>
-			</div>
-			<div class="col-12 col-sm-4">
-				<ul class="list-unstyled">
-					<li class="h1 pt-5 pb-1"><%= @user.name %></li>
-					<li class="h5 text-muted"><%= "@" + @user.username %></li>
-					<% if @user.birthday %>
-						<li><i class="fas fa-birthday-cake pr-2"></i><%= @user.birthday.to_s(:birthday) %></li>
-					<% else %>
-						<li><i class="fas fa-birthday-cake pr-2"></i>未設定</li>
-					<% end %>
-				</ul>
-				<div class="row">
-					<div class="col-12 col-sm-12">
-						<div id="follow_<%= @user.id %>_count">
-							<%= render partial: "relationships/count", locals: { user: @user } %>
-						</div>
-					</div>
+			<div class="col-12 col-md-4">
+				<div class="pt-3">
+					<%= image_tag(@user.icon.to_s, size: "200x200", class: "rounded-circle border") %>
 				</div>
 			</div>
-			<div class="col-12 col-sm-4 pt-5 pb-4">
-				<% if session_user?(@user) %>
-					<%= link_to("プロフィールを編集", "/#{@user.username}/edit", { class: "btn btn-lg btn-outline-primary rounded-pill"}) %><br>
-					<%= link_to("設定", "/#{@user.username}/setting", { class: "btn btn-lg btn-outline-primary rounded-pill mt-3 px-5" }) %>
-				<% else %>
-					<div id="follow_<%= @user.id %>">
-						<%= render partial: "relationships/relationship", locals: { user: @user }  %>
-					</div>
-				<% end %>
+			<div class="col-12 col-md-4 align-self-center">
+				<div class="h2 mt-4">
+					<%= @user.name %>
+				</div>
+				<div class="h5 text-muted mt-3">
+					<%= "@" + @user.username %>
+				</div>
+				<div class="mt-3">
+					<% if @user.birthday %>
+						<i class="fas fa-birthday-cake pr-2"></i><%= @user.birthday.to_s(:birthday) %>
+					<% else %>
+						<i class="fas fa-birthday-cake pr-2"></i>未設定
+					<% end %>
+				</div>
+				<div class="mt-3" id="follow_<%= @user.id %>_count">
+					<%= render partial: "relationships/count", locals: { user: @user } %>
+				</div>
+			</div>
+			<div class="col-12 col-md-4">
+				<div class="mt-5">
+					<% if session_user?(@user) %>
+						<%= link_to("プロフィールを編集", "/#{@user.username}/edit", { class: "btn btn-lg btn-outline-primary rounded-pill"}) %><br>
+						<%= link_to("設定", "/#{@user.username}/setting", { class: "btn btn-lg btn-outline-primary rounded-pill mt-3 px-5" }) %>
+					<% else %>
+						<div id="follow_<%= @user.id %>">
+							<%= render partial: "relationships/relationship", locals: { user: @user }  %>
+						</div>
+					<% end %>
+				</div>
 			</div>
 		</div>
 
 		<div class="row border border-top-0">
-			<div class="col-12 col-sm-12">
+			<div class="col-12 col-md-12">
 				<div class="text-left pt-4 px-5 pb-5">
 					<%= @user.introduction %>
 				</div>
@@ -62,7 +66,7 @@
 		</div>
 
 		<div class="row mb-4">
-			<div class="col-12 col-sm-12 btn-group btn-group-toggle p-0" data-toggle="buttons">
+			<div class="col-12 col-md-12 btn-group btn-group-toggle p-0" data-toggle="buttons">
 			  <label class="btn btn-outline-primary py-2 active">
 			    <input type="radio" name="options" checked>投稿
 			  </label>
