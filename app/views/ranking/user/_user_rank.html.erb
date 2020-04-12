@@ -3,17 +3,17 @@
   <div class="card">
     <% if session_now? %>
       <%= link_to("/#{user.username}") do %>
-        <%= image_tag(user.icon.to_s, class: "card-img-top rounded-circle p-4 mt-4 mb-1") %>
+        <%= image_tag(user.icon.to_s, class: "card-img-top rounded-circle p-4") %>
       <% end %>
     <% else %>
       <div>
-        <%= image_tag(user.icon.to_s, class: "card-img-top rounded-circle p-4 mt-4 mb-1") %>
+        <%= image_tag(user.icon.to_s, class: "card-img-top rounded-circle p-4") %>
       </div>
     <% end %>
-    <div class="card-body mb-2">
+    <div class="card-body pt-0 mb-1">
       <p class="card-text">
         <div class="text-center mb-4">
-          <div class="h4 font-weight-bold">
+          <div class="h3 font-weight-bold">
             <%= user.name %>
           </div>
           <div class="text-muted">
