@@ -34,7 +34,7 @@ class IconUploader < CarrierWave::Uploader::Base
   #   process resize_to_fit: [50, 50]
   # end
 
-	process resize_and_pad(180, 180, "#aaa", "Center")
+	process resize_and_pad(500, 500, "#aaa", "Center")
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

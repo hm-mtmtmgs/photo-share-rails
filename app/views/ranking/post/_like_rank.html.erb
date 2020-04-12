@@ -1,5 +1,5 @@
 <div class="row">
-  <% @post_comment_rank.each.with_index(1) do |post, i| %>
+  <% @post_like_rank.each.with_index(1) do |post, i| %>
 
     <%= render partial: "ranking/post/post_rank", locals: { post: post, rank: i, type: "like_rank" } %>
 
