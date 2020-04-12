@@ -1,6 +1,6 @@
 <% provide(:title, " | ランキング") %>
 
-<main class="text-center" >
+<main class="text-center">
 
 	<div class="container mt-5">
     
@@ -47,19 +47,19 @@
     </div>
     
     <div id="rank_area_0">
-      <%= render partial: "ranking/like_rank" %>
+      <%= render partial: "ranking/post/like_rank" %>
     </div>
     
     <div class="d-none" id="rank_area_1">
-      <%= render partial: "ranking/comment_rank" %>
+      <%= render partial: "ranking/post/comment_rank" %>
     </div>
     
     <div class="d-none" id="rank_area_2">
-      <%= render partial: "ranking/follower_rank" %>
+      <%= render partial: "ranking/user/follower_rank" %>
     </div>
     
     <div class="d-none" id="rank_area_3">
-      <%= render partial: "ranking/posted_rank" %>
+      <%= render partial: "ranking/user/posted_rank" %>
     </div>
     
 	</div>

@@ -1,13 +1,10 @@
 <% provide(:title, " | プロフィールを編集") %>
-<main class="text-center" >
-	<h1 class="h2 font-weight-normal text-muted mt-5">プロフィールを編集</h1>
 
-	<% if @user.errors.any? %>
-		<div class="mt-5"></div>
-		<% @user.errors.full_messages.each do |error| %>
-			<div class="h5 text-danger pb-1"><%= error %></div>
-		<% end %>
-	<% end %>
+<main class="text-center">
+
+	<h1 class="h2 font-weight-normal text-muted mt-5">プロフィールを編集</h1>
+	
+	<%= render partial: "common/error_message", locals: { instance: @user } %>
 
 	<%= form_for(@user, url: { controller: "users", action: "update" }, html: { class: "form-signin container pt-4" }) do |f| %>
 		<ul class="list-unstyled text-left">
@@ -39,4 +36,5 @@
 		</ul>
 	  <%= f.submit "保存", { class: "btn btn-lg btn-primary btn-block mt-5" } %>
 	<% end %>
+	
 </main>

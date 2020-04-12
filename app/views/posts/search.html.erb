@@ -1,73 +1,18 @@
 <% provide(:title, " | 投稿検索") %>
-<main class="text-center" >
+
+<main class="text-center">
 
 	<div class="container mt-5">
 
 		<h1 class="h3 font-weight-normal text-muted mb-4">キーワードで<br class="d-sm-none">投稿を検索</h1>
 
-		<div class="row mx-3 mb-5">
-			<div class="col-12 col-sm-12">
-				<%= form_tag(controller: "posts", action: "search") do %>
-					<div class="input-group">
-						<%= label_tag :keywords, "キーワード検索", { class: "sr-only" } %>
-						<%= text_field_tag("keywords", "", { class: "form-control", placeholder: "キーワード検索" }) %>
-						<span class="input-group-btn">
-							<%= button_tag('<i class="fas fa-search"></i>'.html_safe, { class: "btn btn-primary btn-block ml-2 px-3" }) %>
-						</span>
-					</div>
-				<% end %>
-			</div>
-		</div>
+		<%= render partial: "common/search_form", locals: { search_type: "posts" } %>
 
 		<% unless @posts.empty? %>
 			<% @posts.each do |post| %>
-				<div class="row border p-3 pb-4">
-				
-					<div class="col-12 col-sm-2">
-						<div class="row">
-							<div class="mx-auto mt-4">
-								<%= link_to("/#{post.user.username}", class: "text-decoration-none") do %>
-									<%= image_tag(post.user.icon.to_s, size: "50x50", class: "rounded-circle border") %>
-								<% end %>
-								<%= link_to("/#{post.user.username}") do %>
-									<span class="pl-2">
-										<%= "@" + post.user.username %>
-									</span>
-								<% end %>
-							</div>
-						</div>
-						<div class="row mb-3">
-							<div class="col-7 col-sm-12">
-								<div class="mx-auto mt-4">
-									<%= post.created_at.to_s(:create_date) %><br>
-									<%= post.created_at.to_s(:create_time) %>
-								</div>
-							</div>
-							<div class="col-5 col-sm-12">
-								<div id="like_<%= post.id %>" class="h4 mx-auto mt-4">
-									<%= render partial: 'likes/like', locals: { post: post } %>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-12 col-sm-3">
-						<%= link_to(image_tag(post.image.to_s, class: "img-fluid img-thumbnail"), "/posts/#{post.id}") %>
-					</div>
-					
-					<div class="col-12 col-sm-7">
-						<div class="card border-secondary post-card">
-							<div class="card-header">
-								<div class="h5 m-0"><%= post.title %></div>
-							</div>
-							<div class="card-body">
-								<p class="card-text text-left"><%= post.message %></p>
-							</div>
-						</div>
-					</div>
-					
-				</div>
-				
+			
+				<%= render partial: "common/post_list", locals: { one_post_in_list: post, type: "user_search" } %>
+			
 			<% end %>
 		<% else %>
 			<div class="row border mx-2">

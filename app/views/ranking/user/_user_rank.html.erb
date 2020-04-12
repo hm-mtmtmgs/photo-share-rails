@@ -1,0 +1,60 @@
+<div class="col-12 col-sm-4 mt-3">
+  <%= render partial: "ranking/crown", locals: { ranking_number: rank } %>
+  <div class="card">
+    <% if session_now? %>
+      <%= link_to("/#{user.username}") do %>
+        <%= image_tag(user.icon.to_s, size: "240x240", class: "rounded-circle mt-4 mb-2") %>
+      <% end %>
+    <% else %>
+      <div>
+        <%= image_tag(user.icon.to_s, size: "240x240", class: "rounded-circle mt-4 mb-2") %>
+      </div>
+    <% end %>
+    <div class="card-body mb-2">
+      <p class="card-text">
+        <div class="text-center mb-4">
+          <div class="h4 font-weight-bold">
+            <%= user.name %>
+          </div>
+          <div class="text-muted">
+            <% if session_now? %>
+              <%= link_to("/#{user.username}") do %>
+                <%= "@" + user.username %>
+              <% end %>
+            <% else %>
+              <%= "@" + user.username %>
+            <% end %>
+          </div>
+        </div>
+      </p>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="btn-group">
+          <div class="h4 m-0">
+            <% if type == "follower_rank" %>
+            
+              <i class="fas fa-user-check"></i>
+              <% if session_now? %>
+                <%= link_to("/#{user.username}/follower") do %>
+                  <span class="text-dark">
+                    <span class="h4 pl-3"><%= user.followers.count %></span>&nbsp;フォロワー
+                  </span>
+                <% end %>
+              <% else %>
+                <span class="text-dark">
+                  <span class="h4 pl-3"><%= user.followers.count %></span>&nbsp;フォロワー
+                </span>
+              <% end %>
+            
+            <% elsif type == "posted_rank" %>
+              
+              <i class="far fa-edit"></i>
+              <span class="pl-1"><%= user.post.count %></span>
+              
+            <% end %>
+          </div>
+        </div>
+        <small class="text-muted d-none d-sm-block h6 m-0"><%= time_ago_in_words(user.created_at) %>前から利用</small>
+      </div>
+    </div>
+  </div>
+</div>

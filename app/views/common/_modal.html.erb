@@ -1,0 +1,122 @@
+<div class="modal fade" id="modal_<%= type %>_<%= instance.id %>" tabindex="-1" role="dialog" aria-labelledby="label_<%= type %>_<%= instance.id %>" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    
+      <% if type == "setting_email" %>
+      
+        <div class="modal-header">
+          <h5 class="modal-title" id="label_<%= type %>_<%= instance.id %>">メールアドレスを変更</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <%= form_for(instance, url: { controller: "users", action: "setting" }) do |f| %>
+          <div class="modal-body">
+            <div class="h6 form-signin text-left">
+              <%= f.label :email, 'メールアドレス&nbsp;<span class="text-danger">&nbsp;*</span>'.html_safe %>
+              <%= f.text_field :email, { class: "form-control", placeholder: "メールアドレス" } %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+            <%= f.submit "保存", { class: "btn btn-primary" } %>
+          </div>
+        <% end %>
+        
+      <% elsif type == "setting_password" %>
+      
+        <div class="modal-header">
+          <h5 class="modal-title" id="label_<%= type %>_<%= instance.id %>">パスワードを変更</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <%= form_for(instance, url: { controller: "users", action: "setting" }) do |f| %>
+          <div class="modal-body">
+            <div class="h6 form-signin text-left">
+              <ul class="list-unstyled">
+			          <li>
+                  <%= f.label :current_password, '現在のパスワード&nbsp;<span class="text-danger">&nbsp;*</span>'.html_safe %>
+                  <%= f.password_field :current_password, { class: "form-control", placeholder: "現在のパスワード" } %>
+                </li>
+                <li class="pt-4">
+                  <%= f.label :password, '新しいパスワード&nbsp;<span class="text-danger">&nbsp;*</span>'.html_safe %>
+                  <%= f.password_field :password, { class: "form-control", placeholder: "新しいパスワード" } %>
+                </li>
+                <li class="pt-4">
+                  <%= f.label :password_confirmation, '新しいパスワード（確認用）&nbsp;<span class="text-danger">&nbsp;*</span>'.html_safe %>
+                  <%= f.password_field :password_confirmation, { class: "form-control", placeholder: "新しいパスワード（確認用）" } %>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+            <%= f.submit "保存", { class: "btn btn-primary" } %>
+          </div>
+        <% end %>
+      
+      <% elsif type == "delete_account" %>
+      
+        <div class="modal-header">
+          <h5 class="modal-title" id="label_<%= type %>_<%= instance.id %>">アカウントを削除</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="h6">
+            本当に削除してもよろしいですか？<br>
+            削除したアカウントは元に戻すことができません。
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+          <%= link_to("削除", "/#{instance.username}/setting", { class: "btn btn-danger", method: "delete" }) %>
+        </div>
+        
+      <% elsif type == "delete_post" %>
+        
+        <div class="modal-header">
+          <h5 class="modal-title" id="label_<%= type %>_<%= instance.id %>">「<%= instance.title %>」を削除</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="h6">
+            本当に削除してもよろしいですか？<br>
+            削除した投稿は元に戻すことができません。
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+          <%= link_to("削除", "/posts/#{instance.id}", { class: "btn btn-primary", method: "delete" }) %>
+        </div>
+        
+      <% elsif type == "delete_comment" %>
+      
+        <div class="modal-header">
+          <h5 class="modal-title" id="label_<%= type %>_<%= instance.id %>">コメントを削除</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="h6 text-center">
+            本当に削除してもよろしいですか？<br>
+            削除したコメントは元に戻すことができません。
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+            <%= form_for(instance, html: { method: :delete }) do |f| %>
+            <%= f.hidden_field :id, value: instance.id %>
+            <%= f.submit "削除", { class: "btn btn-primary" } %>
+          <% end %>
+        </div>
+        
+      <% end %>
+    </div>
+  </div>
+</div>
