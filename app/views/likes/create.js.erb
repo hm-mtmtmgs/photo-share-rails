@@ -1,3 +1,5 @@
 $("#like_<%= post.id %>").html("<%= j(render partial: 'likes/like', locals: { post: post }) %>");
-$("#like_user_show_comment_<%= post.id %>").html("<%= j(render partial: 'likes/like', locals: { post: post }) %>");
-$("#like_user_show_like_<%= post.id %>").html("<%= j(render partial: 'likes/like', locals: { post: post }) %>");
+$("#like_user_show_post<%= post.id %>").html("<%= j(render partial: 'likes/like', locals: { post: post }) %>");
+$("#like_user_show_comment<%= post.id %>").html("<%= j(render partial: 'likes/like', locals: { post: post }) %>");
+$("#like_user_show_like<%= post.id %>").html("<%= j(render partial: 'likes/like', locals: { post: post }) %>");
+$("#like_user_search<%= post.id %>").html("<%= j(render partial: 'likes/like', locals: { post: post }) %>");

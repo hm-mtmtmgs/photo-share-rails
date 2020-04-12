@@ -1,49 +1,8 @@
 <% unless @user.like.empty? %>
   <% @user.like.reverse_each do |user_like| %>
-    <div class="row border p-3 pb-4">
-      <div class="col-12 col-sm-2">
-        <div class="row">
-          <div class="mx-auto mt-4">
-            <%= link_to("/#{user_like.post.user.username}", class: "text-decoration-none") do %>
-              <%= image_tag(user_like.post.user.icon.to_s, size: "50x50", class: "rounded-circle border") %>
-            <% end %>
-            <%= link_to("/#{user_like.post.user.username}") do %>
-              <span class="pl-2">
-                <%= "@" + user_like.post.user.username %>
-              </span>
-            <% end %>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-7 col-sm-12">
-            <div class="mx-auto mt-4">
-              <%= user_like.post.created_at.to_s(:create_date) %><br>
-              <%= user_like.post.created_at.to_s(:create_time) %>
-            </div>
-          </div>
-          <div class="col-5 col-sm-12">
-            <div id="like_user_show_like_<%= user_like.post.id %>" class="h4 mx-auto mt-4">
-              <%= render partial: 'likes/like', locals: { post: user_like.post } %>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-sm-3">
-        <%= link_to("/posts/#{user_like.post.id}") do %>
-          <%= image_tag(user_like.post.image.to_s, class: "img-fluid img-thumbnail") %>
-        <% end %>
-      </div>
-      <div class="col-12 col-sm-7">
-        <div class="card border-secondary post-card">
-          <div class="card-header">
-            <div class="h5 m-0"><%= user_like.post.title %></div>
-          </div>
-          <div class="card-body">
-            <p class="card-text text-left"><%= user_like.post.message %></p>
-          </div>
-        </div>
-      </div>
-    </div>
+  
+    <%= render partial: "common/post_list", locals: { one_post_in_list: user_like.post, type: "user_show_like" } %>
+    
   <% end %>
 <% else %>
   <div class="row border">

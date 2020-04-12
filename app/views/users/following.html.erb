@@ -1,5 +1,6 @@
 <% provide(:title, " | #{@user.name}さん (@#{@user.username})のフォローリスト") %>
-<main class="text-center" >
+
+<main class="text-center">
 
 	<div class="container mt-5">
 
@@ -7,32 +8,7 @@
 
 		<% unless @user.followings.empty? %>
 			<% @user.followings.each do |user_following| %>
-				<div class="row border mx-2 py-3">
-					<div class="col-12 col-sm-4 py-3">
-						<%= link_to(image_tag(user_following.icon.to_s, size: "180x180", class: "img-fluid rounded-circle border"), "/#{user_following.username}") %>
-						<div class="pt-3">
-							<div id="follow_<%= user_following.id %>_count">
-								<%= render partial: "relationships/count", locals: { user: user_following } %>
-							</div>
-						</div>
-					</div>
-					<div class="col-12 col-sm-5">
-						<ul class="list-unstyled pt-4">
-							<li class="h1"><%= user_following.name %></li>
-							<li class="h6"><%= link_to("@" + user_following.username, "/#{user_following.username}") %></li>
-							<% unless user_following.introduction.nil? %>
-								<li class="pt-4 text-left"><%= user_following.introduction.truncate(75) %></li>
-							<% end %>
-						</ul>
-					</div>
-					<div class="col-12 col-sm-3 pt-4">
-						<% unless session_user?(user_following) %>
-							<div id="follow_<%= user_following.id %>">
-								<%= render partial: "relationships/relationship", locals: { user: user_following }  %>
-							</div>
-						<% end %>
-					</div>
-				</div>
+				<%= render partial: "common/user_list", locals: { one_user_in_list: user_following } %>
 			<% end %>
 		<% else %>
 			<div class="row border mx-2">

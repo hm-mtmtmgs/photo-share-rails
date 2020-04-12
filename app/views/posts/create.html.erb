@@ -1,14 +1,12 @@
 <% provide(:title, " | 新規投稿") %>
-<main class="text-center" >
+
+<main class="text-center">
+
 	<div class="container mt-5">
+	
 		<h1 class="h2 font-weight-normal text-muted">新規投稿</h1>
 
-		<% if @post.errors.any? %>
-			<div class="mt-4"></div>
-			<% @post.errors.full_messages.each do |error| %>
-				<div class="h5 text-danger pb-1"><%= error %></div>
-			<% end %>
-		<% end %>
+		<%= render partial: "common/error_message", locals: { instance: @post } %>
 
 		<%= form_for(@post, url: { controller: "posts", action: "create" }) do |f| %>
 			<div class="row">
@@ -45,5 +43,7 @@
 
 			</div>
 		<% end %>
+		
 	</div>
+	
 </main>

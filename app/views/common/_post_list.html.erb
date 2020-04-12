@@ -1,0 +1,100 @@
+<div class="row border p-3 pb-4">
+
+  <div class="col-12 col-sm-2">
+    <% if type == "user_show_post" %>
+      <div class="row mb-4">
+        <div class="col-6 col-sm-12">
+          <div class="mx-auto mt-4">
+            <%= one_post_in_list.created_at.to_s(:create_date) %><br>
+            <%= one_post_in_list.created_at.to_s(:create_time) %>
+          </div>
+        </div>
+        <div class="col-3 col-sm-12">
+          <div class="mx-auto mt-4">
+            <div id="like_user_show_post<%= one_post_in_list.id %>" class="h4">
+              <%= render partial: 'likes/like', locals: { post: one_post_in_list } %>
+            </div>
+          </div>
+        </div>
+        <% if session_user?(@user) %>
+          <div class="col-3 col-sm-12">
+            <div class="mx-auto mt-4">
+              <%= link_to("削除", "", { class: "btn btn-outline-primary rounded-pill", data: { toggle: "modal", target: "#modal_delete_post_#{one_post_in_list.id}" } }) %>
+
+              <%= render partial: "common/modal", locals: { instance: one_post_in_list, type: "delete_post" } %>
+
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="row">
+        <div class="mx-auto mt-4">
+          <%= link_to("/#{one_post_in_list.user.username}", class: "text-decoration-none") do %>
+            <%= image_tag(one_post_in_list.user.icon.to_s, size: "50x50", class: "rounded-circle border") %>
+          <% end %>
+          <%= link_to("/#{one_post_in_list.user.username}") do %>
+            <span class="pl-2">
+              <%= "@" + one_post_in_list.user.username %>
+            </span>
+          <% end %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-7 col-sm-12">
+          <div class="mx-auto mt-4">
+            <%= one_post_in_list.created_at.to_s(:create_date) %><br>
+            <%= one_post_in_list.created_at.to_s(:create_time) %>
+          </div>
+        </div>
+        <div class="col-5 col-sm-12">
+          <div id="like_<%= type %><%= one_post_in_list.id %>" class="h4 mx-auto mt-4">
+            <%= render partial: 'likes/like', locals: { post: one_post_in_list } %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+  <div class="col-12 col-sm-3">
+    <%= link_to("/posts/#{one_post_in_list.id}") do %>
+      <%= image_tag(one_post_in_list.image.to_s, class: "img-fluid img-thumbnail") %>
+    <% end %>
+  </div>
+  
+  <div class="col-12 col-sm-7">
+    <div class="card border-secondary post-card">
+      <% if type == "user_show_comment" %>
+        <div class="card-header py-2">
+          <div class="h6 m-0">
+            <div class="row">
+              <div class="col-8 pt-2">
+                <%= user_comment.created_at.to_s(:create_date) %>&nbsp;<br class="d-sm-none">
+                <%= user_comment.created_at.to_s(:create_time) %>
+              </div>
+              <div class="col-4">
+                <% if session_user?(@user) %>
+                  <%= link_to("削除", "", { class: "btn btn-sm btn-outline-primary rounded-pill float-right", data: { toggle: "modal", target: "#modal_delete_comment_#{user_comment.id}" } }) %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= user_comment.comment %></p>
+        </div>
+      <% else %>
+        <div class="card-header">
+          <div class="h5 m-0"><%= one_post_in_list.title %></div>
+        </div>
+        <div class="card-body">
+          <p class="card-text text-left"><%= one_post_in_list.message %></p>
+        </div>
+      <% end %>
+    </div>
+    <% if type == "user_show_comment" %>
+      <%= render partial: "common/modal", locals: { instance: user_comment, type: "delete_comment" } %>
+    <% end %>
+  </div>
+  
+</div>

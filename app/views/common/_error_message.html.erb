@@ -1,0 +1,6 @@
+<% if instance.errors.any? %>
+  <div class="mt-5"></div>
+  <% instance.errors.full_messages.each do |error| %>
+    <div class="h5 text-danger pb-1"><%= error %></div>
+  <% end %>
+<% end %>
