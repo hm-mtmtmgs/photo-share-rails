@@ -1,4 +1,4 @@
-<div class="col-12 col-sm-4 mt-3">
+<div class="col-12 col-md-4 mt-3">
   <%= render partial: "ranking/crown", locals: { ranking_number: rank } %>
   <div class="card">
     <% if session_now? %>
@@ -10,8 +10,8 @@
     <% end %>
     <div class="card-body">
       <p class="card-text">
-        <div class="text-left font-weight-bold">
-          <%= post.title.truncate(20) %>
+        <div class="h5 text-left font-weight-bold">
+          <%= post.title.truncate(18) %>
         </div>
       </p>
       <div class="d-flex justify-content-between align-items-center">

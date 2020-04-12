@@ -1,5 +1,4 @@
 $('.event').on('click', function () {
-  console.log($('.event').length);
   for (var i = 0; i < $('.event').length; i++) {
     $('#rank_show_' + i).removeClass('active');
     $('#rank_area_' + i).addClass('d-none');

@@ -1,24 +1,22 @@
 <main>
 
 	<section class="jumbotron text-center mt-4">
-		<div class="">
-
-			<% if @invalid_message %>
-				<p class="text-center text-danger h4 pb-5">
-					<%= @invalid_message %>
-				</p>
-			<% end %>
-
-			<%= image_tag("/images/common/logo_black.png", size: "402x102", class: "img-fluid mb-4") %>
-			<p class="lead text-gray">あなたの好きな写真をシェアしましょう</p>
-			<p>
-				<% if session_now? %>
-        	<a href="/posts" class="btn btn-lg btn-primary my-2">写真を投稿する</a>
-				<% else %>
-					<a href="/login" class="btn btn-lg btn-primary my-2">写真を投稿する</a>
-				<% end %>
+	
+		<% if @invalid_message %>
+			<p class="text-center text-danger h4 pb-5">
+				<%= @invalid_message %>
 			</p>
-		</div>
+		<% end %>
+
+		<%= image_tag("/images/common/logo_black.png", size: "402x102", class: "img-fluid mb-4") %>
+		<p class="lead text-gray">あなたの好きな写真をシェアしましょう</p>
+		<p>
+			<% if session_now? %>
+				<a href="/posts" class="btn btn-lg btn-primary my-2">写真を投稿する</a>
+			<% else %>
+				<a href="/login" class="btn btn-lg btn-primary my-2">写真を投稿する</a>
+			<% end %>
+		</p>
 	</section>
 
 	<div class="album py-5 bg-light">
@@ -30,10 +28,10 @@
 			</div>
 
 			<div class="row" id="home-carousel">
-				<div id="carouselPlus" class="carousel slide multi-carousel" data-ride="carousel" data-interval=9000 data-pause="false">
+				<div id="carouselPlus" class="carousel slide multi-carousel" data-ride="carousel" data-interval=8000 data-pause="false">
 					<div class="carousel-inner">
 						<% @posts.each do |post| %>
-							<div class="carousel-grid col-12 col-sm-4 px-2">
+							<div class="carousel-grid col-12 col-md-4 px-2">
 								<div class="card">
 									<% if session_now? %>
 										<%= link_to("/posts/#{post.id}") do %>
