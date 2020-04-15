@@ -10,9 +10,11 @@
 <% end  %>
 	
 <main class="text-center" >	
+
 	<% if @error %>
 		<div class="h5 text-danger pt-5"><%= @error %></div>
 	<% end %>
+
 	<%= form_tag("/login", method: :post, class: "form-signin container") do %>
 		<%= image_tag("/images/common/logo_black.png", size: "402x102", class: "img-fluid mb-4 pb-2") %>
 		<%= label_tag :email, "メールアドレス", { class: "sr-only" } %>
@@ -21,7 +23,15 @@
 		<%= password_field_tag("password", "", { class: "form-control mb-4", placeholder: "パスワード" }) %>
 		<%= submit_tag("ログイン", { class: "btn btn-lg btn-primary btn-block" }) %>
 	<% end %>
+	
+	<%= form_tag("/login", method: :post, class: "form-signin container pt-0") do %>
+		<%= hidden_field_tag :email, ENV['TEST_USER_EMAIL'] %>
+		<%= hidden_field_tag :password, ENV['TEST_USER_PASSWORD'] %>
+		<%= submit_tag("テストでログイン", { class: "btn btn-lg btn-warning btn-block" }) %>
+	<% end %>
+	
 	<p class="mb-5">
 		アカウントをお持ちではないですか？ <a href="/signup">登録する</a>
 	</p>
+	
 </main>
