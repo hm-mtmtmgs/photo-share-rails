@@ -1,24 +1,33 @@
-# README
+# PhotoShare
+投稿写真共有サービス  
+https://www.photo-share.net
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**※ ログイン用のテストアカウントを用意しています。**
 
-Things you may want to cover:
+# 機能一覧
+- ユーザー認証
+- 画像投稿
+- 投稿へのいいね
+- 投稿へのコメント
+- ユーザーフォロー
+- 各種検索
+- 各種編集・設定
+- ランキング
 
-* Ruby version
+# 言語・使用技術
+### フロント
+- bootstrap
+- jQuery
 
-* System dependencies
+### バックエンド
+- Ruby 2.6.2
+- Ruby on Rails 6.0.2
 
-* Configuration
+### サーバー
+- Nginx 1.12
 
-* Database creation
+### DB
+- MySQL 5.7
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### インフラ
+- AWS（VPC, EC2, RDS, S3, Route 53, ALB, ACM）
